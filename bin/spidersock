@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+var fs          = require('fs'),
+		path        = require('path'),
+		log         = require('verbalize'),
+		argv        = require('minimist')(process.argv.slice(2)),
+		SpiderSock  = {};
+
+var _init = require('../app/Spidersock');
+
+// Verbalize `runner`
+log.runner = 'spidersock';
+
+new _init(argv);

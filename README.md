@@ -1,2 +1,2 @@
-# spidersock-generator
-Generates SpiderSock instance
+SpiderSock Generator
+====================
