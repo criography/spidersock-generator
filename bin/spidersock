@@ -3,8 +3,7 @@
 var fs          = require('fs'),
 		path        = require('path'),
 		log         = require('verbalize'),
-		argv        = require('minimist')(process.argv.slice(2)),
-		SpiderSock  = {};
+		argv        = require('minimist')(process.argv.slice(2));
 
 var _init = require('../app/Spidersock');
 

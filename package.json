@@ -1,7 +1,7 @@
 {
   "name": "spidersock-generator",
   "description": "SpiderSock Generator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/criography/spidersock",
   "author": "Marek Lenik (http://criography.com)",
   "repository": {
@@ -38,6 +38,7 @@
     "chalk": "^1.0.0",
     "fs-readdir-recursive": "^0.1.2",
     "inquirer": "^0.8.5",
+    "ip-regex": "^1.0.3",
     "minimist": "^1.1.1",
     "mkdirp": "^0.5.1",
     "mustache": "^2.0.0",
