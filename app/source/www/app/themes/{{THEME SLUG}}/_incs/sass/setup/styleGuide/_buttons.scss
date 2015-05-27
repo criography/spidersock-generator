@@ -1,0 +1,41 @@
+/* ===================================================================================
+ * Style Guide:
+ * -----------------------------------------------------------------------------------
+ * IV. FORMS: BUTTONS
+ * ===================================================================================
+
+	/* ...........................
+	 * IV#2. BUTTONS
+	 * ........................... */
+
+
+
+		/* 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls.
+		 * 2. Corrects inability to style clickable `input` types in iOS. */
+		button,
+		html [type="button"]{        /* 1 */
+			-webkit-appearance : button;    /* 2 */
+		}
+
+
+
+		/* 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls.
+		 * 2. Improves usability and consistency of cursor style between image-type `input` and others. */
+		button,
+		.button,
+		html [type="button"]{   /* 1 */
+			cursor : pointer;     /* 2 */
+		}
+
+
+
+
+
+		.button{
+			@include list--inlineBlock;
+			padding     : 0.5em 1em;
+		}
+
+
+
+

@@ -1,0 +1,43 @@
+/** ------------------------------------------------------
+	* NUMERIC COLOURED LIST
+	* ------------------------------------------------------
+	* Removes <li> numeration and introduces it back to :before pasudoelements to allow for custom styling
+	* Usage:
+	* .list--numeric--coloured{
+	*   @include numericColouredList(){
+	*	    color:red;
+	*   }
+	* }
+	* @param $el parent of :before
+	*
+	* @depends $colour--bullets   variable set in vars.scss
+	* ------------------------------------------------------ */
+
+@mixin list--block($list:false, $child:false){
+	$childSelector:'';
+
+	@if ($list) {
+
+		/* reset all styling */
+		#{$list}{
+			list-style-type: none;
+		}
+
+		/* set all styles for the item */
+		#{ list--getChild( $list, $child ) }{
+			counter-increment : level1;
+
+			&:before{
+				content  : counter(level1, decimal) ". ";
+				position : relative;
+				@content;
+			}
+		}
+
+	}
+
+}
+
+@include list--block('.list--numeric--coloured', '.list--numeric--coloured__item'){
+	color: $colour--bullets;
+};

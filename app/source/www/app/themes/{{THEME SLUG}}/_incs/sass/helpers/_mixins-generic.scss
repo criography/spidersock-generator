@@ -1,0 +1,123 @@
+
+/* ------------------------------------------------------
+ * COLUMNISE LIST
+ * ------------------------------------------------------
+ * @desc  Transforms <li> into a dynamically sized, table-like elements.
+
+ * @param $c integer:
+ *    1           : all <li>s are 100% wide.
+ *    2           : all <li>s are at filling half of the available columns' width.
+ *    3 [optional]: all <li>s are filling 30% of the total width, with 5% of the gutter.
+ *    0           : all elements are inlined. Widths are set automatically.
+ *
+ * @param $ib boolean: should everything be inline-block and no floats?
+ * ------------------------------------------------------ */
+/*
+@mixin columniseList($c:0, $ib:false){
+	@if($ib){
+		@include inline-block;
+		vertical-align: top;
+	}
+
+
+	@if($c==1){
+		@if($ib){
+			width:columns($total-columns);
+		} @else {
+			@include span($total-columns);
+		}
+
+	}
+
+
+	@else if($c==2){
+		@if($ib){
+			width        : columns($total-columns * .5);
+			margin-left : gutter();
+
+			&:nth-child(2n+1){
+				margin-left : 0;
+				clear       : both;
+			}
+
+		} @else {
+			@include span($total-columns * .5);
+			white-space:inherit;
+
+			&:nth-child(2n){
+				@include omega();
+			}
+		}
+
+	}
+
+
+	@else if($c==3){
+		width        : (100 - 2 * gutter())/3;
+
+
+		@if($ib){
+
+			&,
+			&:nth-child(2n),
+			&:nth-child(2n+1){
+				margin-left : gutter();
+			}
+
+			&:nth-child(3n+1){
+				margin-left : 0;
+				clear       : both;
+			}
+
+		} @else {
+			margin-right : gutter();
+
+			&:nth-child(2n){
+				@include remove-omega;
+			}
+
+			&:nth-child(3n){
+				@include omega();
+			}
+
+		}
+	}
+
+
+	@else if($c==0){
+		width  : auto;
+		margin : 0 1%;
+
+		@if($ib){
+			&:nth-child(2n),
+			&:nth-child(3n){
+				margin : 0 1%;
+			}
+
+		} @else {
+			@include inline-block;
+			float  : none;
+
+			&:nth-child(2n),
+			&:nth-child(3n){
+				@include inline-block;
+				margin : 0 1%;
+				float  : none;
+			}
+		}
+
+
+	}
+}
+*/
+/* ------------------------------------------------------
+ * ENDOF: COLUMNISE LIST
+ * ------------------------------------------------------ */
+
+
+
+
+
+
+
+

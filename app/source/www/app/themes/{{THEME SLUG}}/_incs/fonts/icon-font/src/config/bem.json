@@ -1,0 +1,6 @@
+{
+	"baseClass"  : "iconfont",
+	"classPrefix": "icon--",
+	"mixinPrefix": "icon--",
+	"path"       : "/_incs/fonts/icon-font/"
+}

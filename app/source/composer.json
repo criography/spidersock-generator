@@ -1,0 +1,135 @@
+{
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://wpackagist.org"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/criography/acf-field-page_children.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/criography/wp-typography.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/criography/spidersock-helpers.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/criography/mail-add-sender.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/criography/wpmail-proper-html.git"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "deliciousbrains/wp-migrate-db-pro",
+        "type": "wordpress-plugin",
+        "version": "1.4.6",
+        "dist": {
+          "type": "zip",
+          "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-latest.zip?licence_key=7099b914-42cd-4be7-bc04-2215926b87a9&site_url=composer-test.dev"
+        },
+        "require": {
+          "composer/installers": "~1.0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "deliciousbrains/wp-migrate-db-pro-media-files",
+        "type": "wordpress-plugin",
+        "version": "1.3.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-media-files-latest.zip?licence_key=7099b914-42cd-4be7-bc04-2215926b87a9&site_url=composer-test.dev"
+        },
+        "require": {
+          "composer/installers": "~1.0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "deliciousbrains/wp-migrate-db-pro-cli",
+        "type": "wordpress-plugin",
+        "version": "1.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-cli-latest.zip?licence_key=7099b914-42cd-4be7-bc04-2215926b87a9&site_url=composer-test.dev"
+        },
+        "require": {
+          "composer/installers": "~1.0"
+        }
+      }
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "johnpbloch/wordpress": "*",
+    "composer/installers": "~1.0",
+    "vlucas/phpdotenv": "~1.0.6",
+
+    "criography/spidersock-helpers": "@dev",
+    "criography/wp-typography": "*@dev",
+    "criography/acf-field-page_children": "*@dev",
+    "criography/wpmail-proper-html": "*@dev",
+    "criography/mail-add-sender": "*@dev",
+
+    "criography/mail-add-sender": "*@dev",
+
+    "deliciousbrains/wp-migrate-db-pro": "*",
+    "deliciousbrains/wp-migrate-db-pro-media-files": "*",
+    "deliciousbrains/wp-migrate-db-pro-cli": "*",
+
+    "wpackagist-plugin/adminimize": "*",
+    "wpackagist-plugin/admin-management-xtended": "*",
+    "wpackagist-plugin/akismet": "*",
+    "wpackagist-plugin/backwpup": "*",
+    "wpackagist-plugin/better-wp-security": "*",
+    "wpackagist-plugin/codepress-admin-columns": "*",
+    "wpackagist-plugin/duplicate-post": "*",
+    "wpackagist-plugin/imagemagick-engine": "*",
+    "wpackagist-plugin/raw-html": "*",
+    "wpackagist-plugin/redirection": "*",
+    "wpackagist-plugin/relevanssi": "*",
+    "wpackagist-plugin/restricted-site-access": "*",
+    "wpackagist-plugin/rich-text-tags": "*",
+    "wpackagist-plugin/simple-image-sizes": "*",
+    "wpackagist-plugin/shortcodes-pro": "*",
+    "wpackagist-plugin/tinymce-advanced": "*",
+    "wpackagist-plugin/w3-total-cache": "*",
+    "wpackagist-plugin/clear-cache-for-widgets": "*",
+    "wpackagist-plugin/wordfence": "*",
+    "wpackagist-plugin/wordpress-importer": "*",
+    "wpackagist-plugin/wordpress-seo": "*",
+
+    "wpackagist-plugin/debug-bar": "*",
+    "wpackagist-plugin/debug-bar-actions-and-filters-addon": "*",
+    "wpackagist-plugin/debug-bar-constants": "*",
+    "wpackagist-plugin/debug-bar-post-types": "*",
+    "wpackagist-plugin/debug-bar-query-tracer": "*",
+    "wpackagist-plugin/debug-bar-slow-actions": "*",
+    "wpackagist-plugin/monkeyman-rewrite-analyzer": "*",
+    "wpackagist-plugin/wp-crontrol": "*"
+  },
+  "autoload": {
+    "psr-0": {"Roots\\Bedrock\\Installer": "scripts"}
+  },
+  "scripts": {
+    "post-root-package-install": ["Roots\\Bedrock\\Installer::addSalts"]
+  },
+  "extra": {
+    "installer-paths": {
+      "www/app/plugins/{$name}/": ["type:wordpress-plugin"]
+    },
+    "wordpress-install-dir": "www/core"
+  },
+  "minimum-stability": "stable"
+}

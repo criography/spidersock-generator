@@ -1,0 +1,6 @@
+# Wordpress generated files #
+#############################
+/core
+/app/cache/*
+/app/upgrade/
+!/app/cache/config/master.php

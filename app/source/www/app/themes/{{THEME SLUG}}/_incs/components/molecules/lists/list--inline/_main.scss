@@ -1,0 +1,34 @@
+/**-----------------------------------------------------------------------------
+	* list--inline
+	* -----------------------------------------------------------------------------
+	* Generates a simple, unstyled list with inline LIs
+	* !!! It's a mixin that needs to be called from outside of a selector !!!
+	*
+	* @depends    function  list--getChild                ../_helpers.scss
+	* @param      $list     class selector                list/grid wrapper
+	* @param      $child    element or class selector     list/grid item
+	* -----------------------------------------------------------------------------*/
+
+	@mixin list--inline($list : false, $child : false) {
+		$childSelector : '';
+
+		@if ($list) {
+
+			/* reset all styling */
+			#{$list} {
+				@include list--layout();
+			}
+
+			/* set all styles for the item */
+			#{ list--getChild( $list, $child ) } {
+				display : inline;
+			}
+
+		}
+
+	}
+	@include list--inline('.list--inline', '.list--inline__item');
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: list--inline
+ * -----------------------------------------------------------------------------*/

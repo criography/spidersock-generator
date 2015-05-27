@@ -1,0 +1,286 @@
+/* ===================================================================================
+ * Style Guide:
+ * -----------------------------------------------------------------------------------
+ * I. SEMANTIC TEXT FORMATTING
+ *
+ * @TODO: Add file index in this comment box
+ * @TODO: Simplify and unify I#1. HEADINGS
+ * =================================================================================== */
+
+
+
+
+
+
+	/* .........................
+	 * I#1. HEADINGS
+	 * ......................... */
+
+
+		h1{
+			@include rem(font, $fontWeight--base--regular #{$baseline-px * 2} / 1.375 inherit);
+			color   : $golden;
+			padding : 0;
+		}
+
+
+		h2{
+			@include rem(font, $fontWeight--base--regular #{$baseline-px * 1.5} / 1.375 inherit);
+			color   : $golden;
+			padding : 0;
+		}
+
+
+		h3{
+			@include rem(font, $fontWeight--base--bold #{$baseline-px} / 1.5 inherit);
+			color   : $dark--default;
+			padding : 0;
+		}
+
+
+
+
+
+
+
+
+
+
+
+	/* .........................
+	 * I#2. PARAGRAPHS
+	 * ......................... */
+
+		p{
+			margin   : $line-height 0;
+			position : relative;
+		}
+
+
+
+
+
+
+
+
+
+
+	/* .........................
+	 * I#3. SEPARATORS
+	 * ......................... */
+
+		hr{
+			@include dim(100%, 1em);
+			border     : 0;
+			clear      : both;
+			text-align : center;
+			position   : relative;
+			overflow   : hidden;
+			margin     : $line-height * 2 0;
+			padding    : 0;
+		}
+
+
+
+
+
+
+
+
+
+	/* .........................
+	 * I#4. LINKS
+	 * ......................... */
+
+		a{
+			@include transition(all $time-off ease);
+			color           : $dark--default;
+			text-decoration : none;
+			cursor          : pointer;
+
+			/* Addresses `outline` inconsistency between Chrome and other browsers.  */
+			&:focus{
+				outline : thin dotted;
+			}
+
+
+
+			&[href*="mailto:"],
+			&[href*="tel:"]{
+				&:before{
+					font-size     : .8em;
+					padding-right : 0.25em;
+				}
+			}
+
+
+
+			/* Improves readability when focused and also mouse hovered in all browsers.  */
+			&:active,
+			&:hover,
+			&:before,
+			&:after{
+				@include transition-duration($time-on);
+				outline : 0;
+			}
+
+
+
+			&:hover,
+			&:focus{
+				color : $blue;
+			}
+
+
+
+			&:active{
+				color : $blue;
+			}
+		}
+
+
+
+
+		%link--inline{
+			border-bottom: 2px dotted desaturate(lighten($blue, 35), 15);
+
+			&.hovering,
+			&:hover,
+			&:active,
+			&:focus{
+				color               : $blue;
+				border-color        : $blue;
+				border-bottom-style : solid;
+			}
+		}
+
+
+
+		p,
+		label{
+			a{
+				@extend %link--inline;
+			}
+		}
+
+
+
+
+
+
+
+	/* ................................
+	 * I#5. EMPHASIS AND IMPORTANCE
+	 * ................................ */
+
+		/* Addresses style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */
+		b,
+		strong{
+			font-weight : $fontWeight--base--bold;
+		}
+
+		/* Addresses styling not present in IE 8/9. */
+		mark{
+			background : #ff0;
+			color      : #000;
+		}
+
+
+
+
+
+
+
+	/* .......................................
+	 * I#6. DEFINITIONS AND ABBREVIATIONS
+	 * ....................................... */
+
+		abbr, dfn{
+			font-style : italic;
+
+			&[title]{
+				border-bottom : 1px dotted $blue;
+				cursor        : help;
+
+				&:hover{
+					border-bottom-color : $dark--default
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+	/* .......................................
+	 * I#7. INLINE QUOTING
+	 * ....................................... */
+
+		/* Sets consistent quote types. */
+		q{
+			quotes : "\201C" "\201D" "\2018" "\2019";
+		}
+
+
+
+
+
+
+
+
+	/* .......................................
+	 * I#8. SOURCE CODE
+	 * ....................................... */
+
+		/* Corrects font family set oddly in Safari 5 and Chrome. */
+		code,
+		kbd,
+		pre,
+		samp{
+			font-family : monospace, serif;
+			font-size   : 1em;
+		}
+
+		/* Improves readability of pre-formatted text in all browsers. */
+		pre{
+			white-space : pre;
+			white-space : pre-wrap;
+			word-wrap   : break-word;
+		}
+
+
+
+
+
+
+
+
+	/* .......................................
+	 * I#9. SEMANTIC SCALING AND PLACEMENT
+	 * ....................................... */
+
+		/* Addresses inconsistent and variable font size in all browsers.  */
+		small{
+			font-size : 80%;
+		}
+
+		/* Prevents `sub` and `sup` affecting `line-height` in all browsers. */
+		sub,
+		sup{
+			font-size      : 75%;
+			line-height    : 0;
+			position       : relative;
+			vertical-align : baseline;
+		}
+
+		sup{
+			top : -0.5em;
+		}
+
+		sub{
+			bottom : -0.25em;
+		}
+

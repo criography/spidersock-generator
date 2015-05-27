@@ -1,0 +1,97 @@
+
+/* ------------------------------------------------------
+ * EMCALC
+ * ------------------------------------------------------
+ * calculates new to old value ration in EMs
+ * 16 is assumed as a default font size for majority of browsers.
+ * It's used to calculate media queries, like so:
+ * @media (min-width: emcalc(480)){}
+ *
+ * @param $new  px new value
+ * @param $old  px old value
+ * ------------------------------------------------------ */
+@function emcalc($new, $old:16) {
+	@return #{$new/$old}em;
+}
+
+
+
+
+
+
+
+
+
+@mixin rem($property, $px-values) {
+
+	// Convert the baseline into rems
+	$baseline-rem : $baseline-px / 1rem * 1;
+
+	// Print the first line in pixel values
+	#{$property}: $px-values;
+
+	// If there is only one (numeric) value, return the property/value line for it.
+	@if type-of($px-values) == "number" {
+		#{$property}: $px-values / $baseline-rem;
+
+	} @else {
+		// Create an empty list that we can dump values into
+		$rem-values : ();
+
+		@each $value in $px-values {
+			// If the value is zero or not a number, return it
+			@if $value == 0 or type-of( $value ) != "number" {
+				$rem-values : append($rem-values, $value);
+			} @else {
+				$rem-values : append($rem-values, $value / $baseline-rem);
+			}
+		}
+
+		// Return the property and its list of converted values
+		#{$property}: $rem-values;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//************************************************************************//
+// Grabbed from [bourbon]
+// Default: Webkit, moz, spec
+// Example: @include prefixer(border-radius, $radii, $o: true);
+//************************************************************************//
+@mixin prefixer ($property, $value, $webkit: true,
+																		$moz: true,
+																		$ms: true,
+																		$o: true,
+																		$spec: true){
+
+	@if $webkit { -webkit-#{$property}: $value; }
+	@if $moz    {    -moz-#{$property}: $value; }
+	@if $ms     {     -ms-#{$property}: $value; }
+	@if $o      {      -o-#{$property}: $value; }
+	@if $spec   {         #{$property}: $value; }
+
+}
+
+
+
+
+
+
+
+
+
+
+// http://stackoverflow.com/questions/12328259/how-do-you-strip-the-unit-from-any-number-in-sass/12335841#12335841
+@function strip-units($value) {
+	@return $value / ($value * 0 + 1);
+}

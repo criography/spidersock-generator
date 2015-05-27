@@ -1,0 +1,61 @@
+.slide{
+	opacity:0;
+}
+
+
+
+@for $total from 2 through 10 {
+
+
+
+		$singleDuration       : 3.5s;                                                 /* how long each slide is visible for */
+		$transitionDuration   : 0.4s;                                                /* fade-in duration */
+		$totalDuration        : $total * ($singleDuration + $transitionDuration);   /* total cycle duration */
+		$transitionPercentage : percentage($transitionDuration / ($totalDuration));
+		$visibilityPercentage : percentage($singleDuration / ($totalDuration ));
+
+
+		@include keyframes(slider-#{$total}-fadein){
+			#{$visibilityPercentage + 2 * $transitionPercentage}{
+				opacity:0;
+			}
+
+			#{$transitionPercentage, $visibilityPercentage + $transitionPercentage} {
+				opacity:1;
+			}
+		}
+
+
+
+	.slider-#{$total}{
+		.slide{
+			@include prefixer('animation', #{$totalDuration linear 0s normal none infinite slider-#{$total}-fadein}, true, false, false, false, true);
+
+
+
+			@for $slide from 1 through $total {
+
+				&:nth-child(#{$slide}){
+
+					/* first slide is always visible and doesnrt eun any animation */
+					@if $slide == 1 {
+						@include prefixer('animation', none, true, false, false, false, true);
+						opacity:1;
+
+					/* all other slides follow the same animation with incrementally increased delay */
+					}@else{
+						@include prefixer('animation-delay', #{($slide - 1) * ($singleDuration + $transitionDuration) - $transitionDuration}, true, false, false, false, true);
+					}
+
+
+
+				}
+
+
+
+}
+
+		}
+
+	}
+}

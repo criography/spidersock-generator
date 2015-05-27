@@ -1,0 +1,128 @@
+/* ===================================================================================
+ * Module Name: pagination
+ * ===================================================================================
+ * pagination
+ *
+ * @basedon 
+ *
+ * @dependency 
+ * =================================================================================== */
+
+
+/* ------------------------------------------------------
+ * GENERIC
+ * ------------------------------------------------------ */
+
+
+		.pagination{
+			@extend %cf;
+			text-align     : center;
+			padding-bottom : 1.5em;
+			position       : relative;
+			margin         : $line-height 0;
+		}
+
+			.pagination-link,
+			.pagination-lite-link{
+				@include inline-block;
+				width : 50%;
+			}
+
+			.pagination-link{
+				@include abs($b:0);
+				text-align:left;
+
+				&:last-child{
+					right      : 0;
+					text-align : right;
+				}
+			}
+
+			.pagination-lite-link{
+				text-align : center;
+				width      : 100%;
+				max-width  : 320px;
+				margin     : 0.25em 0;
+				padding    : 0.5em 1em;
+			}
+
+			.pagination-list{
+				@extend %list--inlineBlock;
+				@include inline-block;
+				width : 100%;
+			}
+
+				.pagination-list a{
+					display:block;
+				}
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * 320
+ * ------------------------------------------------------ */
+		@media (min-width: emcalc(320)){
+
+			.pagination{
+				padding-bottom : 0;
+			}
+
+			.pagination-link{
+				@include rel($b:auto, $r:auto);
+				text-align:left;
+				width : auto;
+			}
+
+			.pagination-list{
+				width : auto;
+			}
+
+		}
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * 480
+ * ------------------------------------------------------ */
+		@media (min-width: emcalc(480)){
+
+			.pagination-lite-link{
+				width     : auto;
+				max-width : none;
+				margin    : 0;
+
+				&:first-child{
+					margin-right:3%;
+				}
+			}
+
+			.button-single:first-child{
+				margin-right:0;
+			}
+
+
+		}
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * 1248
+ * ------------------------------------------------------ */
+		@media (min-width: emcalc(1248)){
+
+			.pagination-lite-link:first-child{
+				margin-right:.75%;
+			}
+
+
+		}
+		

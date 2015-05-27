@@ -1,0 +1,89 @@
+
+/* ------------------------------------------------------
+ * BROWSER SPECIFIC SELECTORS
+ * ------------------------------------------------------ */
+
+@mixin webkit(){
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+		@content;
+	}
+}
+
+
+
+
+
+@mixin chrome(){
+	@media not all and (-webkit-min-device-pixel-ratio:0) {
+		@content;
+	}
+}
+
+
+
+
+
+@mixin firefox(){
+	@media screen and (-moz-images-in-menus:0) {
+     @content;
+  }
+}
+
+
+
+
+
+@mixin opera(){
+	@media not screen and (1) {
+		@content;
+	}
+}
+
+
+
+@mixin ie8(){
+	@media \0screen {
+		@content;
+	}
+}
+
+
+
+@mixin ie10(){
+	@media (-ms-high-contrast: active), (-ms-high-contrast: none) {
+		@content;
+	}
+}
+
+
+
+
+
+/* fixes 3D transform flickering in Webkits */
+@mixin deflicker($shift:1){
+	-webkit-perspective-origin    : 50% 50%;
+	-webkit-backface-visibility   : hidden;
+	-webkit-transform             : translateZ(0px + $shift);
+}
+
+
+
+
+
+/* target mobile devices
+  PLEASE NOTE: the assumption is unsafe */
+@mixin mobilise(){
+	@media  (max-device-width: 1024px),
+					(max-width : 1200px) and (-webkit-min-device-pixel-ratio: 1.5),
+					(max-width : 1200px) and (min--moz-device-pixel-ratio: 1.5),
+					(max-width : 1200px) and (-o-min-device-pixel-ratio: 3/2){
+
+		@content;
+
+	}
+
+}
+
+/* ------------------------------------------------------
+ * ENDOF: BROWSER SPECIFIC SELECTORS
+ * ------------------------------------------------------ */

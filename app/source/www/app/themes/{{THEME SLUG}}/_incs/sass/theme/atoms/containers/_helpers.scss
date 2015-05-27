@@ -1,0 +1,9 @@
+%container{
+	@extend %cf;
+	position : relative;
+	width    : 100%;
+
+	@include ie8(){
+		min-width: 960px;
+	}
+}

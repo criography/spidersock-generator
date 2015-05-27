@@ -1,0 +1,34 @@
+/**-----------------------------------------------------------------------------
+ * linebreaker (before and after)
+ * -----------------------------------------------------------------------------
+ * Injects a linebreaking pseudoelement between inline elements.
+ * Useful for span-wrapped words
+ * Available as a mixin and predefined classes
+ * -----------------------------------------------------------------------------*/
+
+	@mixin linebreaker($where:before){
+		@if $where != before { $where : after; }
+
+		&:#{$where}{
+				content : '';
+				display : block;
+		}
+	}
+
+
+
+
+
+
+	.linebreaker--before{
+		@include linebreaker();
+	}
+
+
+	.linebreaker--after{
+		@include linebreaker(after);
+	}
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: linebreaker
+ * -----------------------------------------------------------------------------*/

@@ -1,0 +1,61 @@
+/* ===================================================================================
+ * Style Guide:
+ * -----------------------------------------------------------------------------------
+ * VI. OTHER PATTERNS & MICROFORMATS
+ *
+ * @TODO: Add file index in this comment box
+ * @TODO: Document and organise this whole file into more structured chunks
+ * @TODO: Document block/submodules
+ * ===================================================================================
+
+
+
+
+
+	/* ...........................
+	 * VI#1. BLOCKS
+	 * ........................... */
+
+
+
+
+	/* ...........................
+	 * VI#4. ADDRESS
+	 * ........................... */
+	 address{
+	  font-style: normal;
+	 }
+
+
+
+
+
+
+
+
+
+	/* ...........................
+	 * VI#4. MISC
+	 * ........................... */
+
+		.blowout{
+			border-left : 1px dashed $grey;
+			margin      : 0 -1.5em;
+			padding     : 0 1.5em;
+			position    : relative;
+
+			&:before{
+				@include transform(rotate(-90deg));
+				position     : absolute;
+				top          : 2em;
+				left         : -4em;
+				content      : attr(data-label);
+				font-variant : small-caps;
+				font-weight  : $fontWeight--base--bold;
+			}
+		}
+
+
+
+
+

@@ -1,0 +1,35 @@
+/**-----------------------------------------------------------------------------
+	* list--inlineBlock
+	* -----------------------------------------------------------------------------
+	* Generates a simple, unstyled list with inline-block LIs
+	* !!! It's a mixin that needs to be called from outside of a selector !!!
+	*
+	* @depends    function  list--getChild                ../_helpers.scss
+	* @param      $list     class selector                list/grid wrapper
+	* @param      $child    element or class selector     list/grid item
+	* @param      $valign   string                        vertical alignment of list items
+	* -----------------------------------------------------------------------------*/
+
+	@mixin list--inlineBlock($list:false, $child:false, $valign:top){
+
+		@if ($list) {
+
+			/* set all styles for the wrapper */
+			#{$list}{
+				@include list--layout();
+			}
+
+
+			/* set all styles for the item */
+			#{ list--getChild( $list, $child ) }{
+				@include inline-block($valign);
+			}
+
+		}
+	}
+
+	@include list--inlineBlock('.list--inlineBlock', '.list--inlineBlock__item');
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: list--inlineBlock
+ * -----------------------------------------------------------------------------*/

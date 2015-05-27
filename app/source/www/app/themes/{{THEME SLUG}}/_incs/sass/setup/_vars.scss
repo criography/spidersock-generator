@@ -1,0 +1,275 @@
+/* COMPASS SETTINGS
+ * ------------------------------------------- */
+$supported-browsers: ("android", "android-chrome", "android-firefox", "chrome", "firefox", "ie", "ie-mobile", "ios-safari", "opera", "safari");
+$browser-minimum-versions: ("ie": "8");
+$debug-browser-support: true;
+
+
+
+
+
+
+/* MODULE OPTIONS
+ * ------------------------------------------- */
+$isPrototyping                  : false;  // [true/false]
+$showGrid                       : false;  // [true/false]
+$hasDeepNav                     : false;  // [true/false]
+$topNavDropDown-allowThreeCols  : true;   // [true/false]
+$isFullWidth                    : false;  // [true/false] should fluidity stop at 1280px? Please note: custom grids require
+
+
+
+
+
+
+/** SIZING
+	* -------------------------------------------
+	* Use it to dictate values affecting other variables and mixins
+	*/
+$baseline-px: 10px;       /* used for REM unit calculations. Your font-size on html element should be set to 62.5% or calc(1em * .625) */
+$baseline-fs: 22px;       /* used for all sorts of base font sizing calculations. It's the default font size */
+
+
+
+
+/* GRID
+ * -------------------------------------------
+ * Docs:
+ * http://susydocs.oddbird.net/en/latest/settings/
+ * ------------------------------------------- */
+$susy-base: (
+  gutter-position     : after,
+  container-position  : center,
+  global-box-sizing   : border-box,
+  last-flow           : to,
+  debug               : ( image   : show-columns,         /* show-columns | hide */
+											    color   : rgba(#f00, .05),
+											    output  : background,
+											    toggle  : top right,
+											  ),
+  use-custom          : ( background-image    : true,
+											    background-options  : false,
+											    box-sizing          : true,
+											    clearfix            : true,
+											    rem                 : true,
+											  )
+);
+
+
+
+/* applies to all gridbases by default */
+$susy-default: (
+	container : 90%,
+	columns   : 4,
+  gutters   : 1/4,
+);
+
+$susy-480: (
+	container : 90%,
+	columns   : 4,
+  gutters   : 1/6,
+);
+
+
+$susy-640: (
+	container : 92%,
+	columns   : 6,
+  gutters   : 1/4,
+);
+
+$susy-1024: (
+	container : 94%,
+	columns   : 12,
+  gutters   : 1/3,
+);
+
+
+$susy-1280: (
+	container : 1224px,
+	columns   : 12,
+  gutters   : 1/3,
+);
+
+
+$susy-narrow: (
+	container :  (600 / ($baseline-fs / 1px) ) * 1em,
+	columns   : 4,
+  gutters   : 1/3,
+);
+
+$susy-full-1280: (
+	container : 96%,
+	columns   : 12,
+  gutters   : 1/3,
+);
+
+$susy-full-1600: (
+	container : 97%,
+	columns   : 12,
+  gutters   : 1/4,
+);
+
+$susy-full-1920: (
+	container : 98%,
+	columns   : 12,
+  gutters   : 1/5,
+);
+
+
+
+/*
+
+$susy: (
+  flow: ltr,
+  math: fluid,
+  output: float,
+  gutter-position: after,
+  container: auto,
+  container-position: center,
+  columns: 4,
+  gutters: .25,
+  column-width: false,
+  global-box-sizing: content-box,
+  last-flow: to,
+  debug: (
+    image: hide,
+    color: rgba(#66f, .25),
+    output: background,
+    toggle: top right,
+  ),
+  use-custom: (
+    background-image: true,
+    background-options: false,
+    box-sizing: true,
+    clearfix: false,
+    rem: true,
+  )
+);
+
+*/
+
+
+$grid-background-column-color : rgba(black, .02);
+$total-columns-default        : 4;
+$total-columns-640            : 8;
+$total-columns-1024           : 12;
+$total-columns-1280           : 12;
+
+
+
+
+
+
+
+
+
+
+
+/** COLOURS
+	* -------------------------------------------
+	* First use colour_name[-state] names instead referring
+	* to usage to minimise their amount and future confusion.
+	* e.g.: $blue--dark, $red--inactive
+	*
+	* Then declare global variables for common usage [components depend on it].
+	* ------------------------------------------- */
+
+
+/* CORE — DO NOT REMOVE */
+$grey             : #888;              /* @TODO: kill this mofo with fire*/
+
+
+/* SITE SPECIFIC */
+$dark--default    : #000000;          /* applies to majority of black and near-black elements, e.g. text */
+$light--default   : #fbf9f4;          /* applies to majority of white and near-white elements, e.g. background */
+
+$blue             : #3b4a58;          /* e.g.: lighter fills, icons, frames etc. Possibly hover effects as well*/
+$blue--dark       : #212834;
+
+$golden           : #bc965b;          /* used for panel backgrounds, button and icon fills, headings on dark backgrounds and minor decoration */
+
+$red              : #a71d27;          /* border of a field with an error, fill of the error tooltip */
+$red--active      : saturate(lighten($red, 10), 4);
+
+
+/* FUNCTIONAL ASSIGNMENTS */
+$colour--links          : $red
+$colour--links--active  : $red--active
+
+$colour--headings       : $golden;
+
+$colour--bullets        : $golden;
+
+
+
+/** IMAGES
+	* -------------------------------------------
+	* 1. Use BEM for variable names.
+	* 2. Use functional prefixes like: sprite--, button--, cursor--
+	* 3. use svgz for external images or inline svg (max 4-5KB) with external pngs as fallback:
+	*     $button--yellow__bottom                 : inline-image('UI/button-yellow-bottom.svg');
+	*     $button--yellow__bottom--png            : image-url('UI/button-yellow-bottom.png');
+	*     $sprite--form                           : image-url('UI/sprite--form.svgz');
+	* 4. Separate core images from seasonal ones (should be commented out once the display period ends to prevent bloat)
+	*/
+
+/* CORE — DO NOT REMOVE */
+$logoSmall                    : false;   /* [{filename}/false] Logo (DO NOT REMOVE, just set to false if not used) */
+
+
+/* SEASONAL */
+
+
+
+
+
+
+
+
+
+/** TYPOGRAPHY
+	* -------------------------------------------
+	* 1. Use BEM for variable names.
+	* 2. Declare full font stacks
+	* 3. Optionally declare font weights
+	*/
+
+/* Base Typeface used for body text, and some headings */
+$fontFamily--base             : Georgia, serif;
+$fontSize--base               : 20px;
+$fontLeading--base            : 1.5;
+$fontWeight--base--regular    : normal;
+$fontWeight--base--bold       : normal;
+$line-height                  : $fontLeading--base * 1em;         /* @TODO: deprecate or separate per family */
+
+/* Alt Typeface used for headings and UI elements */
+$fontFamily--alt              : Verdana, sans-serif;
+$fontWeight--alt--regular     : normal;
+$fontSize--alt                : 20px;
+$fontLeading--alt             : 1.5;
+
+/* Syntax Highlighter Typeface */
+$fontFamily--code             : Monaco, Courier New, monospace;
+
+
+
+
+
+
+
+
+
+
+/* GENERIC TIMINGS
+ * ------------------------------------------- */
+$time-on  : .2s;
+$time-off : .7s;
+
+
+
+
+
+
+
+/* MISC
+ * ------------------------------------------- */

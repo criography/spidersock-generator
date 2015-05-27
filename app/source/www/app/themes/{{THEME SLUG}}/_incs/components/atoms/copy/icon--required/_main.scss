@@ -1,0 +1,18 @@
+/** icon--required
+	* ---------------------------------
+	* adds asterisk after targeted element.
+	* used mostly on form labels */
+.icon--required{
+	&:after{
+		content        : '*';
+		vertical-align : super;
+		font-size      : .5em;
+		position       : relative;
+		top            : .1em;
+		left           : .25em;
+
+		@include firefox(){
+			top:0;
+		}
+	}
+}

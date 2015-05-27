@@ -1,0 +1,115 @@
+/** list--glyphSeparated
+	* ---------------------------------------
+	* Generates an inline list, separated by a glyph of choice
+	* !!! needs to be placed outside of a selector !!!
+	* @param    $list    {class selector}               list/grid wrapper
+	* @param    $child   {element or class selector}    list/grid item
+	* @param    $glyph   {string | 'bullet'}            string to separate list items with. It'll be wrapped in single spaces
+	*
+	* USAGE:
+	* @include list--glyphSeparated('.list--bulletSeparated', '.list--bulletSeparated__item', 'bullet');
+	*/
+
+@mixin list--glyphSeparated($list:false, $child:false, $glyph:false){
+	$childSelector:'';
+
+	@if ($list and $glyph) {
+		@if $glyph == 'bullet' {
+			$glyph : '\2022';
+		}
+
+		#{$list}{
+			@include list--layout();
+		}
+
+		/* set all styles for the item */
+		#{list--getChild( $list, $child )}{
+			@extend .list--inline__item;
+
+			&:before{
+				content:' ' + $glyph + ' ';
+			}
+
+			&:first-child{
+				&:before{
+					content: none;
+				}
+			}
+
+		}
+	}
+
+
+}
+
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: list--glyphSeparated
+ * -----------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+/** list--commaSeparated
+	* ---------------------------------------
+	* !!! needs to be placed outside of a selector !!!
+	*
+	* @param    $list                   class selector                list/grid wrapper
+	* @param    $child                  element or class selector     list/grid item
+	* @depends  list--glyphSeparated
+	*/
+@mixin list--commaSeparated($list:false, $child:false, $hasFullstop:false, $hasAnd:false){
+	$childSelector:'';
+
+	@if ($list) {
+		#{$list}{
+			@extend .list--inline;
+		}
+
+		/* set all styles for the item */
+		#{list--getChild( $list, $child )}{
+			@extend .list--inline__item;
+
+			&:before{
+				content:', ';
+			}
+
+			&:first-child{
+				&:before{
+					content: none;
+				}
+			}
+
+			&:last-child{
+				@if $hasAnd {
+					&:before{
+						content : ' and ';
+					}
+				}
+
+
+				@if $hasFullstop {
+					&:after{
+						content : '.';
+					}
+				}
+
+			}
+
+		}
+	}
+
+
+}
+
+@include list--commaSeparated('.list--commaSeparated', '.list--commaSeparated__item', true, true);
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: list--commaSeparated
+ * -----------------------------------------------------------------------------*/

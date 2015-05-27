@@ -1,0 +1,175 @@
+/* -------------------------------------- */
+/* IMPORT ALL MODULES                     */
+/* -------------------------------------- */
+
+/* SASS/COMPASS LIBRARIES */
+
+@import "compass/css3/animation";
+@import "compass/css3/background-clip";
+@import "compass/css3/box-sizing";
+@import "compass/css3/columns";
+@import "compass/css3/flexbox";
+@import "compass/css3/font-face";
+@import "compass/css3/images";
+@import "compass/css3/inline-block";
+@import "compass/css3/opacity";
+@import "compass/css3/selection";
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+@import "compass/css3/user-interface";
+@import "breakpoint";
+@import "susy";
+
+
+/* SETUP: GLOBAL VARS, FONTS */
+@import 'setup/vars';
+@import 'setup/fonts';
+
+
+/* HELPERS: MIXINS, ANIMATIION DEFINITIONS, MAIN/GENERIC CLASSES AND EXTEND VARIABLES */
+/* Make sure Mixins load last as they may use certain definitions, e.g. clearfix      */
+@import 'helpers/*';
+
+
+
+
+/* STYLE GUIDE: RESETS, NORMALIZATIONS, GENERIC PATTERNS */
+@import 'setup/styleGuide';
+
+
+
+
+
+
+/* LAYOUT AND GRID INIT */
+@import "../components/molecules/lists/**/*";
+@import "../components/molecules/grids/**/*";
+@import 'partials/modules/_pageLayout/_main';  /* @TODO kill it. use components/layouts or theme/layouts */
+
+
+
+
+
+
+/* UI MODULES */
+/* these 2 things have to be included first as they define grids */
+
+@import "../components/atoms/**/*";
+@import "../components/molecules/**/*";
+
+@import 'partials/modules/module';
+@import 'partials/modules/tabs/default';
+
+
+
+/* -------------------------------------- */
+
+
+
+
+
+
+
+/* -------------------------------------- */
+/* INIT AND MANAGE ALL MODULES            */
+/* -------------------------------------- */
+
+@include pageLayout();
+@include module();
+
+
+
+
+
+
+
+@media (min-width: emcalc(480)){
+	@include pageLayout("480");
+	@include module("480");
+}
+
+
+
+
+
+
+@media (min-width: emcalc(640)){
+	@include pageLayout("640");
+	@include module("640");
+}
+
+
+
+
+
+
+@media (min-width: emcalc(768)){
+	@include pageLayout("768");
+	@include module("768");
+}
+
+
+
+
+
+
+
+
+@media (min-width: emcalc(1024)){
+	@include pageLayout("1024");
+	@include module("1024");
+}
+
+
+
+
+
+
+
+
+@media (min-width: emcalc(1100)){
+	@include pageLayout("1100");
+}
+
+
+
+
+
+
+
+
+@media (min-width: emcalc(1248)){
+	@include pageLayout("1280");
+	@include module("1280");
+}
+
+
+
+
+
+
+
+
+@media (min-width: emcalc(1400)){
+	@include module("1440");
+}
+
+
+
+
+
+
+
+@media (min-width: emcalc(1560)){
+	@include module("1600");
+}
+
+
+
+
+
+
+
+@media (min-width: emcalc(1880)){
+	@include module("1920");
+}

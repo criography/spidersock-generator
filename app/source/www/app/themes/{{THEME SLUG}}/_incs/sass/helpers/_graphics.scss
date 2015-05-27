@@ -1,0 +1,330 @@
+
+/* ------------------------------------------------------
+ * SVG
+ * ------------------------------------------------------
+ * @desc  Generates background-image with appropriate fallback
+ *
+ * @param $svgImg   Path to or base64ed SVG image
+ * @param $fallback Path to Fallback
+ * ------------------------------------------------------ */
+	@mixin svg($svgImg:false, $fallback:false){
+
+		@if $svgImg and $fallback {
+			background-image: $fallback;
+			background-image: -webkit-linear-gradient(transparent, transparent), $svgImg;
+			background-image: linear-gradient(transparent, transparent), $svgImg;
+		}
+
+	}
+
+/* ------------------------------------------------------
+ * ENDOF: SVG
+ * ------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * TRIANGLE
+ * ------------------------------------------------------
+ * @desc  Renders a CSS triangle.
+
+ * @param $direction  string[up, left, right, bottom]
+ * @param $color      hexValue
+ * @param $size       cssUnit[px, em, rem]
+ * @param $height     cssUnit[px, em, rem] set to stretch or shrink the base of the triangle
+ * ------------------------------------------------------ */
+
+@mixin triangle($direction, $color, $size, $height:false) {
+	@include dim(0, 0);
+
+	@if $direction == "left" {
+		border-bottom   : $size solid transparent;
+		border-top      : $size solid transparent;
+		@if $height {
+			border-right  : $height solid $color;
+		}else{
+			border-right  : $size solid $color;
+		}
+	}
+
+
+	@else if $direction == "right" {
+		border-bottom   : $size solid transparent;
+		border-top      : $size solid transparent;
+		@if $height {
+			border-left   : $height solid $color;
+		}else{
+			 border-left  : $size solid $color;
+		}
+	}
+
+
+	@else if $direction == "up" {
+		border-left     : $size solid transparent;
+		border-right    : $size solid transparent;
+		@if $height {
+			border-bottom : $height solid $color;
+		}else{
+			 border-bottom: $size solid $color;
+		}
+	}
+
+
+	@else if $direction == "down" {
+		border-right    : $size solid transparent;
+		border-left     : $size solid transparent;
+		@if $height {
+			border-top    : $height solid $color;
+		}else{
+			 border-top   : $size solid $color;
+		}
+	}
+}
+
+/* ------------------------------------------------------
+ * ENDOF: TRIANGLE
+ * ------------------------------------------------------
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * GRADIENTS
+ * ------------------------------------------------------
+ * @desc  Renders a CSS gradient.
+ *
+ *
+ * @param $startColor colour value
+ * @param $endColor   colour value
+ * @param $direction  [num]deg
+ * ------------------------------------------------------ */
+
+@mixin hGradient($startColor: #000, $endColor: #fff) {
+	background-color  : nth($endColor, 1);
+	@include background-image(linear-gradient(left, $startColor, $endColor));
+	background-repeat : repeat-x;
+}
+
+
+@mixin vGradient($startColor: #000, $endColor: #fff) {
+	background-color  : nth($endColor, 1);
+	@include background-image(linear-gradient($startColor, $endColor));
+	background-repeat : repeat-x;
+}
+
+
+@mixin dGradient($startColor: #000, $endColor: #fff, $deg: 45deg) {
+	background-color  : nth($endColor, 1);
+	@include background-image(linear-gradient($deg, $startColor, $endColor));
+	background-repeat : repeat-x;
+}
+
+
+/* ------------------------------------------------------
+ * ENDOF: GRADIENTS
+ * ------------------------------------------------------
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * SATURATION
+ * ------------------------------------------------------
+ * @desc  Applies SVG filter desaturating the element.
+ *        In IE 6-9 fallss back to 100% greyscale if given $v is <= than .5.
+ *
+ * @param $v saturation value 0 = greyscale, 1 = full colour
+ * ------------------------------------------------------ */
+
+@mixin saturation($v:0){
+
+	$svg : "#{
+						unquote("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='saturate' values='") +
+							$v +
+							unquote("'/></filter></svg>#grayscale")
+					}";
+
+	filter          : url( $svg ); /* Firefox */
+	@if $v <= .5 {
+		filter          : gray; /* IE6-9 */
+	}
+	-webkit-filter  : grayscale((1 - $v) * 100%); /* Current Webkit */
+
+}
+
+
+/* ------------------------------------------------------
+ * ENDOF: DESATURATE
+ * ------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * HSV TO HSL
+ * ------------------------------------------------------
+ * converts given color in HSV to HSL value
+ *
+ * @param mixed $h  Hue [deg, float]
+ * @param mixed $s  Saturation [%, float]
+ * @param mixed $v  Value [%, float]
+ * @returns list [hue[deg], saturation[%], value [%]]
+ * ------------------------------------------------------ */
+@function hsv_to_hsl($h, $s: 0, $v: 0) {
+	@if type_of($h) == 'list' {
+		$v: nth($h, 3);
+		$s: nth($h, 2);
+		$h: nth($h, 1);
+	}
+
+	@if unit($h) == 'deg' {
+		$h: 3.1415 * 2 * ($h / 360deg);
+	}
+	@if unit($s) == '%' {
+		$s: 0 + ($s / 100%);
+	}
+	@if unit($v) == '%' {
+		$v: 0 + ($v / 100%);
+	}
+
+	$ss: $s * $v;
+	$ll: (2 - $s) * $v;
+
+	@if $ll <= 1 {
+		$ss: $ss / $ll;
+	} @else if ($ll == 2) {
+		$ss: 0;
+	} @else {
+		$ss: $ss / (2 - $ll);
+	}
+
+	$ll: $ll / 2;
+
+	@return 360deg * $h / (3.1415 * 2), percentage(max(0, min(1, $ss))), percentage(max(0, min(1, $ll)));
+}
+/* ------------------------------------------------------
+ * ENDOF: HSV TO HSL
+ * ------------------------------------------------------ */
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * HSL TO HSV
+ * ------------------------------------------------------
+ * converts given color in HSL to HSV value
+ *
+ * @param mixed $h  Hue [deg, float] or Colour definition
+ * @param mixed $ss Saturation [%, float]
+ * @param mixed $ll Lightness [%, float]
+ * @returns list [hue[deg], saturation[%], value [%]]
+ * ------------------------------------------------------ */
+@function hsl_to_hsv($h, $ss: 0, $ll: 0) {
+	@if type_of($h) == 'list' {
+		$ll: nth($h, 3);
+		$ss: nth($h, 2);
+		$h: nth($h, 1);
+	} @else if type_of($h) == 'color' {
+		$ll: lightness($h);
+		$ss: saturation($h);
+		$h: hue($h);
+	}
+
+	@if unit($h) == 'deg' {
+		$h: 3.1415 * 2 * ($h / 360deg);
+	}
+	@if unit($ss) == '%' {
+		$ss: 0 + ($ss / 100%);
+	}
+	@if unit($ll) == '%' {
+		$ll: 0 + ($ll / 100%);
+	}
+
+	$ll: $ll * 2;
+
+	@if $ll <= 1 {
+		$ss: $ss * $ll;
+	} @else {
+		$ss: $ss * (2 - $ll);
+	}
+
+	$v: ($ll + $ss) / 2;
+	$s: (2 * $ss) / ($ll + $ss);
+
+	@return 360deg * $h / (3.1415 * 2), percentage(max(0, min(1, $s))), percentage(max(0, min(1, $v)));
+}
+/* ------------------------------------------------------
+ * ENDOF: HSL TO HSV
+ * ------------------------------------------------------ */
+
+
+
+
+
+/* ------------------------------------------------------
+ * COLOR TO HSV
+ * ------------------------------------------------------
+ * converts given color to HSV value
+ *
+ * @param mixed $color Colour definition
+ * @returns list [hue[deg], saturation[%], value [%]]
+ * ------------------------------------------------------ */
+@function color_to_hsv($color) {
+	@return hsl_to_hsv($color);
+}
+/* ------------------------------------------------------
+ * ENDOF: COLOR TO HSV
+ * ------------------------------------------------------ */
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * HSV TO HEX
+ * ------------------------------------------------------
+ * converts given color from HSV to HEX value
+ *
+ * @param mixed $h  Hue
+ * @param mixed $s  Saturation
+ * @param mixed $v  Value
+ * @returns string HEX value of the given colour
+ * ------------------------------------------------------ */
+	@function hsv_to_hex($h, $s: 0, $v: 0) {
+		$hsl: hsv_to_hsl($h, $s, $v);
+		@return hsl(nth($hsl, 1), nth($hsl, 2), nth($hsl, 3));
+	}
+/* ------------------------------------------------------
+ * ENDOF: HSV TO HEX
+ * ------------------------------------------------------ */

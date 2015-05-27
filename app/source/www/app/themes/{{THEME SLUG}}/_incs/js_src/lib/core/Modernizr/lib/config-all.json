@@ -1,0 +1,30 @@
+{
+  "classPrefix": "mzr--",
+  "options": [
+    "addTest",
+    "atRule",
+    "fnBind",
+    "html5printshiv",
+    "load",
+    "prefixedCSS",
+    "setClasses",
+    "testProp"
+  ],
+  "feature-detects": [
+    "test/css/animations",
+    "test/css/backgroundsize",
+    "test/css/borderimage",
+    "test/css/calc",
+    "test/css/checked",
+    "test/css/columns",
+    "test/css/flexbox",
+    "test/css/flexboxlegacy",
+    "test/css/pointerevents",
+    "test/css/remunit",
+    "test/css/transforms3d",
+	  "test/inputtypes",
+    "test/svg",
+    "test/touchevents",
+    "test/video"
+  ]
+}

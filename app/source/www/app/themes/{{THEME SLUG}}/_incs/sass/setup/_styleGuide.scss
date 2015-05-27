@@ -1,0 +1,228 @@
+/* ===================================================================================
+ * Style Guide
+ * ===================================================================================
+ * Contains all default visuals, including resets, for all _used_ elements as well as
+ * sets very basic, but not function-specific sets of elements.
+ *
+ * Should be used to build publically accessible reference page.
+ * Example: http://www.paulrobertlloyd.com/about/styleguide/
+ *
+ * Based on:
+ * normalize.css v2.0.1 | MIT License | git.io/normalize
+ * Eric Meyer Reset http://meyerweb.com/eric/tools/css/reset/
+ * =================================================================================== */
+
+
+
+
+
+/* =======================================================================
+ * GENERIC
+ * ======================================================================= */
+
+	@-webkit-viewport {
+		width : device-width;
+	}
+
+	@-moz-viewport {
+		width : device-width;
+	}
+
+	@-ms-viewport {
+		width : device-width;
+	}
+
+	@-o-viewport {
+		width : device-width;
+	}
+
+	@viewport {
+		width : device-width;
+	}
+
+
+
+
+
+
+
+	/* ---------------------------------------
+	 * ROOT ELEMENTS
+	 * --------------------------------------- */
+
+		/* 1. Sets default font family.
+		 * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom.
+		 * 3. Enables Ligatures
+		 */
+		html {
+			-webkit-text-size-adjust    : 100%; /* 2 */
+			-ms-text-size-adjust        : 100%; /* 2 */
+			-webkit-overflow-scrolling  : touch;
+			-webkit-tap-highlight-color : lighten($dark--default, 75%);
+			-webkit-text-size-adjust    : 100%;
+			-ms-text-size-adjust        : 100%;
+
+			-webkit-font-feature-settings : "liga", "dlig"; /* 3 */
+			-moz-font-feature-settings    : "liga=1, dlig=1";
+			-moz-font-feature-settings    : "liga", "dlig";
+			-ms-font-feature-settings     : "liga", "dlig";
+			-o-font-feature-settings      : "liga", "dlig";
+			font-feature-settings         : "liga", "dlig";
+			text-rendering                : optimizeLegibility;
+			-webkit-font-smoothing        : antialiased;
+
+			font-family                   : $fontFamily--base;
+			font-weight                   : $fontWeight--base--regular;
+			font-size                     : 62.5%;
+			font-size                     : calc(1em * .625);
+			line-height                   : $fontLeading--base;
+			color                         : $dark--default;
+			background                    : $light--default;
+		}
+
+
+
+		/* Removes default margin. */
+		body, html {
+			margin   : 0;
+			padding  : 0;
+			position : relative;
+		}
+
+
+		body{
+			@include rem(font-size, $baseline-fs);
+			nowhitespace   : afterproperty;
+			letter-spacing : 0;
+			width          : 100%;
+		}
+
+
+
+
+
+
+
+
+	/* ---------------------------------------
+	 * HTML5 ELEMENTS
+	 * --------------------------------------- */
+		/* set global box-sizing (uses susy mixin)*/
+		@include border-box-sizing;
+
+
+		/* Corrects `block` display not defined in some browsers. */
+		article,
+		aside,
+		details,
+		figcaption,
+		figure,
+		footer,
+		header,
+		div,
+		main,
+		nav,
+		section,
+		summary {
+			display: block;
+		}
+
+		/* Addresses styling for `hidden` attribute not present in IE 8/9. */
+		[hidden] {
+			display: none;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+	/* ---------------------------------------
+	 * MODULES
+	 * --------------------------------------- */
+	@import 'setup/styleGuide/gridbase';
+
+	@import 'setup/styleGuide/copy';
+
+	@import 'setup/styleGuide/lists';
+
+	@import 'setup/styleGuide/grids/inlineBlock';
+	@import 'setup/styleGuide/grids/table';
+
+	@import 'setup/styleGuide/tables';
+	//@import 'setup/styleGuide/tables/default';
+
+	@import 'setup/styleGuide/media';
+
+	@import 'setup/styleGuide/forms';
+
+	@import 'setup/styleGuide/other';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

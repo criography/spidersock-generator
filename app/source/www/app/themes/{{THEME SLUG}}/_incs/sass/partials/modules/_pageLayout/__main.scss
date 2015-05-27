@@ -1,0 +1,877 @@
+/* ===================================================================================
+ * Module Name: Main Wrappers Layout
+ * ===================================================================================
+ * Contains all outer elements, including grid containers and grid setup.
+ *
+ * @dependency 'compass/typography/vertical_rhythm' imported in 'partials/modules/pageLayout/__main.scss'
+ *
+ * @dependency $showGrid boolean Defines whether the grid preview should be visible.
+ *                               Expected to be set in _vars.scss.
+ *
+ * @dependency $showGrid boolean Defines whether the grid preview should be visible.
+ *                               Expected to be set in _vars.scss.
+ * =================================================================================== */
+
+
+
+
+
+
+
+@mixin pageLayout($res:false){
+
+	@if $res == false {
+	/* ------------------------------------------------------
+	 * GENERIC
+	 * ------------------------------------------------------ */
+
+		$total-columns  : map-get( $susy-default, columns );
+		$grid-padding   : (100% - map-get($susy-default, container)) * .5;
+
+
+		.container{
+			position    : relative;
+			width       : 100%;
+		}
+
+		.container--generic{
+			margin:2em auto 0;
+		}
+
+
+
+
+
+
+			/* FONT SCALERS
+			* -------------------------------------*/
+			.scaler{
+				font-size:.8em;
+			}
+
+
+
+
+
+
+
+			/* 100% WIDE PANELS
+			* -------------------------------------*/
+			.container--sidePadded{
+			}
+
+
+			.section--bottomSpacer {
+				margin-bottom: $line-height * 3;
+			}
+
+			.section--topSpacer {
+				margin-top: $line-height * 3;
+			}
+
+			.section--spacer {
+				margin-top: 2em;
+				margin-bottom: 1.75em;
+			}
+
+
+
+
+
+
+	/* LISTS
+	* -------------------------------------*/
+
+		/*	.columnisedList{
+				li{
+					@include columniseList(1);
+				}
+			}
+
+
+			.grid--half,
+			.grid--half--padded{
+				@include columniseList(1, true);
+			}
+
+
+
+			.grid--oneThird{
+				@include columniseList(1, true);
+			}
+
+		*/
+
+
+
+
+		.col--full,
+		.col--threeFourths,
+		.col--oneFourth,
+		.col--twoThirds,
+		.col--oneThird,
+		.col--half,
+		.grid--oneFourth{
+			@extend %cf;
+			width       : 100%;
+			white-space : normal !important;
+		}
+
+
+
+
+		.grid--oneFourth{
+			width      : 100%;
+			max-width  : 320px;
+			margin     : 0 auto;
+			margin     : .5em auto;
+		}
+
+
+
+		.col--omega{
+			float        : right;
+			margin-right : 0;
+		}
+
+
+		.table{
+			display:table;
+		}
+
+
+		/* cells can fill only one row in full view, so they will not have any margin in the end */
+		.cell--half,
+		.cell--half--vcentered,
+		.cell--half--centered{
+			display       : block;
+			width         : 100%;
+		}
+
+		.cell--half{
+			vertical-align: top;
+		}
+
+		.cell--half--centered,
+		.cell--half--vcentered{
+			vertical-align: middle;
+		}
+
+		.cell--half--centered{
+			text-align: center;
+		}
+
+
+		.cell--oneThird{
+			display       : block;
+			width         : 100%;
+			padding-right : gutter()*.5;
+		}
+
+
+
+		.fieldset--half,
+		.fieldset--full{
+			padding-bottom:.25em;
+		}
+
+
+		.fieldset--full{
+			clear:both;
+		}
+
+
+		@if($isPrototyping){
+			#header, #footer, .content, .sidebar, .slider, article[role="main"]{
+				background : rgba(255,0,0,.3);
+			}
+		}
+
+
+
+	/* ------------------------------------------------------
+	 * ENDOF: GENERIC
+	 * ------------------------------------------------------ */
+	}
+
+
+
+
+
+
+
+
+
+
+	@else if $res == "480" {
+	/* ------------------------------------------------------
+	 * 480
+	 * ------------------------------------------------------ */
+
+
+
+
+
+		.grid--oneFourth{
+			@include inline-block;
+			vertical-align : top;
+			width         : (100% - gutter())*.5;
+			margin-left   : gutter();
+
+			&:nth-of-type(2n+1){
+				margin-left : 0;
+				clear       : left;
+			}
+		}
+
+
+
+
+		.col--omega{
+			float        : right;
+			margin-right : 0;
+		}
+
+
+
+		.fieldset--oneThird{
+			@include inline-block;
+			width     : columns(2);
+			min-width : columns(2);
+
+			&:first-child{
+				margin-right:gutter();
+			}
+		}
+
+
+
+	/* ------------------------------------------------------
+	 * ENDOF: 480
+	 * ------------------------------------------------------ */
+	}
+
+
+
+
+
+
+
+
+
+
+
+	@else if $res == "640" {
+	/* ------------------------------------------------------
+	 * 640
+	 * ------------------------------------------------------ */
+		$total-columns  : map-get($susy-640, columns );
+		$grid-padding   : (100% - map-get($susy-640, container)) * .5;
+
+
+
+		.scaler{
+			font-size:.85em;
+		}
+
+
+		.columnisedList{
+			li{
+				//@include columniseList(2);
+			}
+		}
+
+		.grid--half,
+		.grid--half--padded{
+			//@include columniseList(2, true);
+		}
+
+		.grid--half--padded{
+			&:nth-child(2n+1){
+				padding-right:gutter();
+			}
+
+			&:nth-child(2n){
+				padding-left:gutter();
+			}
+		}
+
+		.grid--oneThird{
+			//@include columniseList(2, true);
+		}
+
+
+
+
+		.col--half,
+		.col--oneFourth{
+			@include span(4);
+		}
+
+		.col--half{
+			&:last-child{
+				@include omega();
+			}
+		}
+
+		.col--oneFourth{
+			&:nth-child(2n){
+				@include omega();
+			}
+		}
+
+		.col--twoThirds{
+			@include span(5);
+		}
+
+		.col--oneThird{
+			@include span(3);
+		}
+
+
+
+
+		.grid--oneFourth{
+			width         : (100% - gutter())*.5;
+			margin-left   : gutter();
+
+			&:nth-of-type(2n+1){
+				margin-left : 0;
+			}
+		}
+
+
+
+		.cell--half,
+		.cell--half--vcentered,
+		.cell--half--centered{
+			padding-right : gutter()*.5;
+			display       : table-cell;
+			width         : 50%;
+
+			&:last-child{
+				padding : 0 0 0 gutter()*.5;
+			}
+		}
+
+
+
+		.cell--oneThird{
+			display       : table-cell;
+			width         : (100% - gutter() *2) / 3;
+			padding-right : gutter();
+
+			&:last-child{
+				padding-right:0;
+				width:((100% - gutter() *2) / 3) - gutter();
+			}
+		}
+
+
+		.col--omega{
+			float        : right;
+			margin-right : 0;
+		}
+
+	/* -- NEW --*/
+
+	/* ------------------------------------------------------
+	 * ENDOF: 640
+	 * ------------------------------------------------------ */
+	}
+
+
+
+
+
+
+
+
+
+
+	@else if $res == "768" {
+	/* ------------------------------------------------------
+	 * 768
+	 * ------------------------------------------------------ */
+
+
+
+
+
+
+	/* 100% WIDE PANELS
+	* -------------------------------------*/
+
+		.section--spacer {
+			margin-top: 3.25em;
+			margin-bottom: 3em;
+		}
+
+
+
+		.columnisedList{
+			li{
+			//	@include columniseList(2);
+			}
+		}
+
+
+		.grid--oneThird{
+		//	@include columniseList(2, true);
+		}
+
+
+
+
+	/* -- NEW --*/
+		.col--twoThirds{
+			@include span(5);
+		}
+
+		.col--twoThirds-rightPadded{
+			@include span(4);
+			@include post(1);
+		}
+
+		.col--oneThird{
+			@include span(3);
+		}
+
+
+		.grid--oneFourth{
+			width         : (100% - gutter()*.5)*.5;
+			margin-left   : gutter()*.5;
+
+			&:nth-of-type(2n+1){
+				margin-left : 0;
+			}
+		}
+
+
+		.col-inlineBlock{
+			@include inline-block;
+			float : none;
+		}
+
+		.col--omega{
+			float        : right;
+			margin-right : 0;
+		}
+
+
+
+
+		.fieldset--half{
+			@include span(4);
+			@include inline-block;
+			padding       : 0;
+			margin-bottom : 0.75em;
+
+			&:nth-child(2){
+				@include omega();
+			}
+		}
+
+
+
+
+
+
+		.fieldset--oneThird{
+			width:31.5%;
+			max-width: 15em;
+			min-width: 31.5%;
+
+			&:first-child{
+				margin:0;
+			}
+
+			&:nth-child(2){
+				margin-left:2.75%;
+				margin-right:2.75%;
+			}
+		}
+
+
+
+
+
+
+
+
+		.opening {
+			margin: 6em auto;
+		}
+
+		.opening--large {
+			font-size      : 1.5em;
+			letter-spacing : -0.5px;
+			margin         : $line-height * 2 auto $line-height;
+			text-align     : justify;
+		}
+
+
+
+		.container--bookingWidget + .social{
+			margin-top:6.5em;
+		}
+
+
+	/* ------------------------------------------------------
+	 * ENDOF: 768
+	 * ------------------------------------------------------ */
+	}
+
+
+
+
+
+
+
+
+
+
+	@else if $res == "1024" {
+	/* ------------------------------------------------------
+	 * 960
+	 * ------------------------------------------------------ */
+		$total-columns  : map-get( $susy-1024, columns );
+		$grid-padding   : (100% - map-get($susy-1024, container)) * .5;
+
+
+
+
+
+		/* 100% WIDE PANELS
+		* -------------------------------------*/
+		.gridbase--copy{
+			width         : 940px;
+			max-width     : 940px;
+			min-width     : 940px;
+			padding-left  : 10px;
+			padding-right : 10px;
+		}
+
+		.section--spacer {
+			margin-top: 4em;
+			margin-bottom: 3.5em;
+		}
+
+
+
+		.scaler{
+			font-size:.9em;
+		}
+
+
+
+
+
+
+
+		.columnisedList{
+			li{
+		//		@include columniseList(3);
+			}
+		}
+
+
+		.grid--half,
+		.grid--half--padded{
+			//@include columniseList(2, true);
+		}
+
+		.grid--half--padded{
+			&:nth-child(2n+1){
+				padding-right:gutter();
+			}
+
+			&:nth-child(2n){
+				padding-left:gutter();
+			}
+		}
+
+
+		.grid--oneThird{
+		//	@include columniseList(3, true);
+		}
+
+
+		.col--twoThirds{
+			@include span(8);
+		}
+
+
+
+
+
+		.col--oneFourth{
+
+			&,
+			&:nth-child(2n){
+				@include span(3);
+			}
+
+			&:last-child{
+				float        : right;
+				margin-right : 0;
+			}
+		}
+
+
+		.col--oneThird{
+			@include span(4);
+		}
+
+
+
+
+		.grid--oneFourth{
+			width         : (100% - 2*gutter()*.5)/3;
+			margin-left   : gutter()*.5;
+
+			&:nth-of-type(2n+1){
+				margin-left : gutter()*.5;
+				clear       : none;
+			}
+
+			&:nth-of-type(3n+1){
+				margin-left : 0;
+				clear       : both;
+			}
+		}
+
+
+		.grid-even{
+			.grid--oneFourth{
+
+				&,
+				&:nth-of-type(2n+1),
+				&:nth-of-type(3n+1) {
+					width       : columns(3);
+					margin-left : gutter();
+					clear       : none;
+				}
+
+				&:nth-of-type(4n+1) {
+					clear       : both;
+					margin-left : 0;
+				}
+
+			}
+		}
+
+
+
+		.cell--half,
+		.cell--half--vcentered,
+		.cell--half--centered{
+			padding-right : gutter()*.5;
+
+			&:last-child{
+				padding : 0 0 0 gutter()*.5;
+			}
+		}
+
+
+		.col-inlineBlock{
+			@include inline-block;
+			float : none;
+		}
+
+		.col--omega{
+			float        : right;
+			margin-right : 0;
+		}
+	/* -- NEW --*/
+
+
+
+
+
+		.fieldset--half{
+			margin-bottom : 0;
+		}
+
+
+
+
+
+		.container--bookingWidget + .social {
+			margin-top: 8em;
+		}
+
+
+		.textColumns--two{
+			@include column-count(2);
+			@include column-gap($grid-padding);
+
+			p{
+				margin-top:0;
+			}
+		}
+
+
+
+	/* ------------------------------------------------------
+	 * ENDOF: 960
+	 * ------------------------------------------------------ */
+	}
+
+
+
+
+
+
+
+
+
+
+
+	@else if $res == "1100" {
+	/* ------------------------------------------------------
+	 * 1100
+	 * ------------------------------------------------------ */
+
+		.container--bookingWidget + .social {
+			margin-top: 9em;
+		}
+
+	/* ------------------------------------------------------
+	 * ENDOF: 1100
+	 * ------------------------------------------------------ */
+	}
+
+
+
+
+
+
+
+
+
+
+	@else if $res == "1280" {
+	/* ------------------------------------------------------
+	 * 1200
+	 * ------------------------------------------------------ */
+		$total-columns  : map-get( $susy-1280, columns );
+		$grid-padding   : 0;
+
+
+
+		.scaler{
+			font-size:1em;
+		}
+
+
+
+		.columnisedList{
+			li{
+			//	@include columniseList(3);
+			}
+		}
+
+		.grid--half,
+		.grid--half--padded{
+		//	@include columniseList(2, true);
+		}
+
+		.grid--half--padded{
+			&:nth-child(2n+1){
+				padding-right:gutter();
+			}
+
+			&:nth-child(2n){
+				padding-left:gutter();
+			}
+		}
+
+		.grid--oneThird{
+		//	@include columniseList(3, true);
+		}
+
+		.oneThird,
+		.oneThird-shrink{
+			@include span(4 omega);
+		}
+
+
+
+		.col--oneThird{
+			@include span(4);
+		}
+
+		.col--twoThirds,
+		.col--twoThirds-rightPadded{
+			@include span(8);
+		}
+
+
+
+
+
+		.grid--oneFourth{
+			width         : (100% - 3*gutter()*.25)*.25;
+			margin-left   : gutter()*.25;
+
+			&:nth-of-type(2n+1),
+			&:nth-of-type(3n+1){
+				margin-left : gutter()*.25;
+				clear       : none;
+			}
+
+			&:nth-of-type(4n+1){
+				margin-left : 0;
+				clear       : both;
+			}
+		}
+
+
+
+
+		.cell--half,
+		.cell--half--vcentered,
+		.cell--half--centered{
+			padding-right : gutter()*.5;
+
+			&:last-child{
+				padding : 0 0 0 gutter()*.5;
+			}
+		}
+
+
+		.col-inlineBlock{
+			@include inline-block;
+			float : none;
+		}
+
+		.col--omega{
+			float        : right;
+			margin-right : 0;
+		}
+
+
+
+		.opening{
+			margin-top    : 7.5em;
+			margin-bottom : -2em;
+		}
+
+
+
+
+		.container--bookingWidget + .social {
+			margin-top: 10.5em;
+		}
+
+
+	/* ------------------------------------------------------
+	 * ENDOF: 1200
+	 * ------------------------------------------------------ */
+	}
+
+
+
+
+}

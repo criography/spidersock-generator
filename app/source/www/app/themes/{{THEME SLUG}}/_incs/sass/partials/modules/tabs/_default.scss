@@ -1,0 +1,104 @@
+/* ===================================================================================
+ * TABBED MENU
+ * =================================================================================== */
+
+.tabs{
+	position: relative;
+}
+
+	.tabs__labels{
+		@extend %cf;
+		text-align: center;
+	}
+
+
+		.tab__label--prev{
+			float:left;
+		}
+
+		.tab__label--next{
+			float:right;
+		}
+
+		.tab__labelContainer{
+			@include inline-block;
+		}
+
+			.tab__label{
+				float   : none;
+				margin  : 0;
+				width   : auto;
+				padding : .25em .75em;
+				cursor  : pointer;
+			}
+
+
+
+		.tabs__contentWrapper{
+			@include transition(transform .5s ease,
+													left      .5s ease,
+													position  .5s ease
+			);
+			position: relative;
+			overflow:hidden;
+		}
+
+		.tab__content{
+			@include transition(opacity   .5s ease,
+													height    .5s ease,
+													padding   .5s ease,
+													margin    .5s ease,
+													transform .5s ease,
+													left      .5s ease,
+													position  .5s ease
+			);
+			overflow : hidden;
+			height   : 0;
+			opacity  : 0;
+			float    : left;
+			position: relative;
+
+		}
+
+
+
+	@for $i from 1 through 6{
+		.tab__input{
+			&:nth-of-type(#{$i}):checked{
+				& ~ .tabs__contentWrapper{
+					.tab__content:nth-of-type(#{$i}){
+						height  : auto;
+						opacity : 1;
+					}
+				}
+			}
+		}
+
+
+		.tabs__contentWrapper--#{$i}{
+			width:$i * 100%;
+
+			.tab__content{
+				width:100% / $i;
+			}
+		}
+
+
+	}
+
+
+.tabs--isSlidable{
+	overflow : hidden;
+	width    : 100%;
+	height   : auto;
+
+
+	.tab__content{
+		height   : auto;
+		opacity  : 1;
+		position : absolute;
+		top      : 0;
+	}
+
+
+}

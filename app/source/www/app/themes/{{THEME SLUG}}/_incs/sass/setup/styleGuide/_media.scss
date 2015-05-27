@@ -1,0 +1,60 @@
+/* ===================================================================================
+ * Style Guide:
+ * -----------------------------------------------------------------------------------
+ * III. MEDIA
+ * ===================================================================================
+
+	/* .......................................
+	 * III#1. FIGURES
+	 * ....................................... */
+
+		/* Removes border when inside `a` element in IE 8/9. Sets images as fluid by default */
+		img{
+			border : 0;
+			width  : 100%;
+			height : auto;
+		}
+
+
+		/* Corrects overflow displayed oddly in IE 9. */
+		svg:not(:root){
+			overflow : hidden;
+		}
+
+		/* Addresses margin not present in IE 8/9 and Safari 5. */
+		figure{
+			margin : 0;
+		}
+
+
+
+			blockquote{
+				margin     : 0;
+				padding    : 0;
+			}
+
+
+
+
+
+
+
+
+
+	/* .......................................
+	 * III#2. CANVAS, AUDIO & VIDEO
+	 * ....................................... */
+
+			/* Corrects `inline-block` display not defined in IE 8/9. */
+			audio,
+			canvas,
+			video {
+				@include inline-block(top);
+			}
+
+
+			/* Prevents modern browsers from displaying `audio` without controls. Remove excess height in iOS 5 devices. */
+			audio:not([controls]) {
+				display : none;
+				height  : 0;
+			}

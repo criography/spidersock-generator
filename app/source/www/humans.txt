@@ -1,0 +1,44 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+                
+/* TEAM */
+Team:       Aardvark
+Email:      support@aardvarklondon.com
+Site:       http://aardvarklondon.com
+Twitter:    @aardvarkmedia
+Location:   London, UK
+
+Role:       [e.g. Senior Unicorn]
+Person:     [e.g. Chris Rock]
+Twitter:    [@chrisrock]
+Location:   UK
+
+
+
+
+/* SITE */
+Standards:  PHP, HTML5, CSS3,
+Components: Nudge CRM, jQuery, SASS+Compass
+Software: Node, Grunt, PHPStorm
+
+
+
+/* MISSION */
+We create outstanding customer experiences
+
+        MMMMMM                                                    MMMMMM                                                  MMMMMM7
+       ~MMMMMMM                                                   MMMMMM                                                  MMMMMM7
+       MMMMMMMM=                                                  MMMMMM                                                  MMMMMM7
+      OMMMMMMMMM                                                  MMMMMM            .           .  .                      MMMMMM7   .
+      MMMMOMMMMMM          MMMMMMMM  .   MMMMMM..MMMM    NMMMMMM..MMMMMM OMMMMMZ     MMMM8   ,MMMMMMMM      MMMMMM  MMMM  MMMMMM7 .  MMM
+   . MMMMM.MMMMMM       MMMMMMMMMMMMM    MMMMMM MMMMMZ .MMMMMMMMMMMMMMMM.DMMMMMM    MMMMM+ MMMMMMMMMMMMM .  MMMMMM MMMMMM MMMMMM7   MMMMM$
+    MMMMM  ?MMMMMM       MM+   ZMMMMMM   MMMMMMMMMMMM.~MMMMMM.   MMMMMMM  MMMMMM.   MMMMM   MM   .MMMMMMM   MMMMMMMMMMMM. MMMMMM7 8MMMMM
+    MMMMN   MMMMMM       .    OMMMMMMM   MMMMMMMMMMM, MMMMMMN  . 8MMMMMM  .MMMMMM  DMMMM    .   .8MMMMMMM   MMMMMMMMMMM=  MMMMMM7MMMMMM .
+ . MMMMM   .~MMMMMM      ZMMMMMMMMMMMM   MMMMMMM      MMMMMM      MMMMMM   MMMMMM  MMMM     MMMMMMMMMMMMM   MMMMMMM .     MMMMMMMMMMMM
+  :MMMMMMMMMMMMMMMMM    MMMMMMZ MMMMMM   MMMMMM       MMMMMM      MMMMMM    MMMMMMMMMMM  .~MMMMMM? MMMMMM   MMMMMM        MMMMMMIMMMMMM
+  MMMMMMMMMMMMMMMMMM  .MMMMM,  .MMMMMM   MMMMMM       MMMMMMI    IMMMMMM    .MMMMMMMMM    MMMMM .  MMMMMM   MMMMMM        MMMMMM7 MMMMMM
+ MMMMM?       MMMMMMM .MMMMM+.. MMMMMM.  MMMMMM       DMMMMMM  ..MMMMMMM     MMMMMMMM    OMMMMM   7MMMMMM   MMMMMM        MMMMMM7  MMMMMM:
+IMMMMM        OMMMMMM. MMMMMMMMMMMMMMM~  MMMMMM       .MMMMMMMMMMMMMMMMM      MMMMMMI     MMMMMMMMMMMMMMM   MMMMMM        MMMMMM7   MMMMMMM
+MMMMM         .MMMMMMM  MMMMMMM=MMMMMMM. MMMMMM         :MMMMMMM~ MMMMMM      NMMMMM       MMMMMMM MMMMMM?  MMMMMM        MMMMMM7.   MMMMN.
+    .                 ..  OM7                 .           . :.                .            . DM?.                                   .    .

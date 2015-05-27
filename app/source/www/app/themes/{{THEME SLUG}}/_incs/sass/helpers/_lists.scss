@@ -1,0 +1,45 @@
+/** list--layout
+	* ---------------------------------------
+	* resets styles and margins
+	*/
+	@mixin list--layout(){
+		list-style : none;
+		margin     : 0;
+	}
+
+
+
+
+
+
+
+/** list--getChild
+	* ---------------------------------------
+	* !!! needs to be placed outside of a selector !!!
+	* @param    $list    class selector                list/grid wrapper
+	* @param    $child   element or class selector     list/grid item
+	* @depends  _core.scss
+	*/
+	@function list--getChild($list:false, $child:false){
+
+		$childSelector:'';
+
+		@if ($list and $child) {
+			/* nothing passed */
+			@if ($child==false){
+				$childSelector : #{$list} > li;
+
+				/* 'li' passed */
+			} @else if ($child == 'li'){
+				$childSelector : #{$list} > li;
+
+				/* class name passed */
+			}@else{
+				$childSelector : $child;
+			}
+
+		}
+
+		@return $childSelector;
+
+	}

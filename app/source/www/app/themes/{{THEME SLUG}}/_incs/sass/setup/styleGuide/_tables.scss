@@ -1,0 +1,139 @@
+/* ===================================================================================
+ * Style Guide:
+ * -----------------------------------------------------------------------------------
+ * II. CONTENT GROUPING
+ * ===================================================================================
+
+
+
+	/* .......................................
+	 * II#3. TABULAR DATA
+	 * ....................................... */
+		/* @TODO Reverse Media Queries and make it mobile first */
+
+		/* Remove most spacing between table cells. */
+
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+			margin: 0;
+			padding: 0;
+
+			&:hover{
+				caption{
+					@include transition(opacity $time-on ease-in-out);
+					@include opacity(.75);
+				}
+			}
+		}
+
+			caption {
+				@include transition(opacity 1s ease-in-out);
+				@include opacity(.5);
+				font-size    : .75em;
+				padding      : $line-height;
+				caption-side : bottom;
+				text-align   : left;
+				font-style   : italic;
+			}
+
+			thead{
+				border-bottom: 2px solid $dark--default;
+			}
+
+			tfoot{
+				border       : 2px solid $dark--default;
+				border-width : 2px 0;
+				background   : $grey;
+			}
+
+				tr{
+					border-bottom: 1px solid $grey;
+
+					&:last-child {
+						border-bottom: none;
+					}
+
+					&:nth-child(2n) {
+						background: #fbfbfb;
+					}
+				}
+
+					th, td {
+						padding    : 0 $line-height;
+						height     : $line-height * 2;
+						text-align : left;
+						border     : 0;
+						vertical-align: middle;
+					}
+
+					th {
+						border-width: 2px;
+					}
+
+					td {
+						color: #666;
+					}
+
+
+
+
+		/* Responsive Tables. Based on Chris Coyier's http://css-tricks.com/responsive-data-tables */
+		@media (max-width: emcalc(640))  {
+
+			/* Force table to not be like tables anymore */
+			table, thead, tbody, tfoot, th, td, tr {
+				display: block;
+			}
+
+			/* Hide table headers (but not display: none;, for accessibility) */
+			thead {
+				@include abs($l:-9999px);
+			}
+
+				th{
+					font-weight: normal;
+				}
+
+
+			tfoot{
+				th[scope="row"]{
+					padding     : $line-height * .25 3% $line-height * .25 3%;
+					height      : $line-height;
+					text-align  : center;
+					font-weight : bold;
+				}
+			}
+
+				tr {
+					border: 1px solid $grey;
+				}
+
+				tbody tr{
+					&:first-child{
+						border-top:0;
+					}
+					&:last-child{
+						border-bottom: 2px solid $grey;
+					}
+				}
+
+
+					td,
+					tfoot th:not([scope="row"]){
+						/* Behave  like a "row" */
+						border   : none;
+						position : relative;
+						padding  : $line-height * .25 3% $line-height * .25 53%;
+						height   : $line-height;
+
+						&:before {
+							content       : attr(data-label);
+							position      : absolute;
+							top           : $line-height * .25;
+							left          : 3%;
+							width         : 43%;
+							white-space   : nowrap;
+						}
+					}
+		}

@@ -1,0 +1,42 @@
+/**-----------------------------------------------------------------------------
+ * dl--inline
+ * -----------------------------------------------------------------------------
+ * Renders Definition Lis with inline elements looking like:
+ *  TERM — DEFINITION
+ *  TERM — DEFINITION
+ *  TERM — DEFINITION
+ *
+ * @depends %mdash
+ * @extends
+ * -----------------------------------------------------------------------------*/
+
+.dl-inline {
+	dt, dd {
+		display : inline;
+		margin  : 0;
+	}
+
+	dt {
+		&:before {
+			@include dim(100%, 0);
+			content : '';
+		}
+
+		&:after {
+			@extend %mdash;
+			font-weight : $fontWeight--base--regular;
+		}
+
+	}
+}
+
+
+
+/* resets unnecessary margin following paragraphs. This needs to be tweaked per project basis */
+p + .dl-inline {
+	margin-top : -1.5em;
+}
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: dl--inline
+ * -----------------------------------------------------------------------------*/

@@ -1,0 +1,108 @@
+/* ===================================================================================
+ * ACCORDION MENU
+ * ===================================================================================
+ * Based on: http://tympanus.net/codrops/2012/02/21/accordion-with-css3/
+ * =================================================================================== */
+
+
+
+.accordion{
+	width      : 100%;
+}
+
+.no-js .accordion{
+	input[type="radio"]:checked{
+
+		& + .accordion-content-wrapper{
+
+			.accordion-content{
+				height:auto;
+			}
+
+		}
+
+	}
+}
+
+
+
+input[type="radio"]:checked{
+
+	& + .accordion-content-wrapper{
+
+		.accordion-header{
+			color:red;
+		}
+
+	}
+
+}
+
+	.accordion-content-wrapper{
+		text-align : left;
+		position   : relative;
+		width      : 100%;
+	}
+
+
+	.accordion-blocky .accordion-header,
+	.accordion-header{
+		@include inline-block;
+		@include transition(color $time-off ease);
+		font-size : 1.5em;
+		position  : relative;
+		z-index   : 20;
+		cursor    : pointer;
+		margin    : 0;
+		padding   : 0;
+
+		&:hover{
+			@include transition-duration($time-on);
+			color:red;
+
+			label{
+				@include transition-duration($time-on);
+			}
+		}
+
+		&:active{
+			@include transition-duration($time-on);
+			color:green;
+		}
+
+		label{
+			@include transition(color $time-off ease);
+			@include inline-block;
+			@include box-sizing(border-box);
+			float   : none;
+			padding : 0 $grid-padding;
+			margin  : 0;
+			width   : 100%;
+		}
+	}
+
+
+	.accordion-content{
+		@include transition(height .5s ease);
+		overflow : hidden;
+		position : relative;
+		z-index  : 10;
+		height   : 0;
+	}
+
+
+	.mzr-js .accordion-content{
+		@include transition(none);
+		position : absolute;
+		left     : -9999px;
+		height   : auto;
+		width    : 100%;
+
+		&.visible{
+			position : relative;
+			left     : 0;
+			height   : 0;
+		}
+	}
+
+

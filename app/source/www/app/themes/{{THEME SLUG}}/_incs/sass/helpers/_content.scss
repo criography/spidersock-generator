@@ -1,0 +1,116 @@
+
+/* ------------------------------------------------------
+ * PLACEHOLDER
+ * ------------------------------------------------------
+ * @desc  allows styling of placeholder text
+ * ------------------------------------------------------ */
+
+@mixin placeholder(){
+
+	&::-webkit-input-placeholder{
+		@content;
+	}
+
+	&:-moz-placeholder{
+		@content;
+	}
+
+	&::-moz-placeholder{
+		@content;
+	}
+
+	&:-ms-input-placeholder{
+		@content;
+	}
+
+}
+/* ------------------------------------------------------
+ * ENDOF: PLACEHOLDER
+ * ------------------------------------------------------ */
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * FONT STYLING SHORTHAND
+ * ------------------------------------------------------
+ * @desc  Use sparringly.
+ *        Idealy go with 'font' or vertical-rhythm mixins
+
+ * @param $fs   cssUnit font-size
+ * @param $lh   cssUnit line-height
+ * @param $fw   cssUnit font-weight
+ * @param $fst  cssUnit font-style
+ * ------------------------------------------------------ */
+
+@mixin fs($fs:false, $lh:false, $fw:false, $fst:false){
+	@if $fs               {font-size    : $fs;}
+	@if $lh               {line-height  : $lh;}
+	@if $fw               {
+		@if $fw!='inherit'  {font-weight  : $fw;}
+	}
+	@if $fst              {font-style   : $fst;}
+}
+
+
+@mixin font-size($font-size: 16){
+	font-size : #{$font-size}px;
+	font-size : #{$font-size / 10}rem;
+}
+
+/* ------------------------------------------------------
+ * ENDOF: FONT STYLING SHORTHAND
+ * ------------------------------------------------------ */
+
+
+
+
+
+
+
+
+
+
+/** emdash
+	* ---------------------------------
+	* inserts an emdash surrounded by thin spaces */
+
+%mdash{
+	content:"\200A\2014\200A";
+}
+
+
+
+
+
+
+
+
+
+
+
+@mixin text-overflow() {
+	overflow      : hidden;
+	text-overflow : ellipsis;
+	white-space   : nowrap;
+}
+
+
+
+
+
+
+
+
+
+/* disables ligatures in order for small-caps to work in Chrome/webkit  */
+@mixin resetSmallCaps(){
+	text-rendering                : optimizeSpeed;
+	-webkit-font-feature-settings : normal;
+}

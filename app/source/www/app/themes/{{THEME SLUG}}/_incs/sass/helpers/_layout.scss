@@ -1,0 +1,295 @@
+/* ===================================================================================
+ * Module Name: Generic Definitions
+ * ===================================================================================
+ * Contains all generic classes and @extend definitions.
+ * @TODO kill it and merge with styleGuide if possible
+ * =================================================================================== */
+
+
+
+
+ /* ---------------------------------------------------------------------
+ * FLOATS
+ * --------------------------------------------------------------------- */
+%cf{
+	&:before,
+	&:after {
+		content:"";
+		display:table;
+	}
+
+	&:after {
+		clear:both;
+	}
+
+	zoom:1;
+}
+
+
+
+@mixin cf(){
+	&:before,
+	&:after {
+		content:"";
+		display:table;
+	}
+
+	&:after {
+		clear:both;
+	}
+
+	zoom:1;
+}
+
+.cf{
+	@extend %cf;
+}
+
+
+
+
+
+
+%noMargin{
+	margin:0;
+}
+
+%noPadding{
+	margin:0;
+}
+
+%noWhitespace{
+	@extend %noMargin;
+	@extend %noPadding;
+	border  : 0;
+}
+
+
+
+
+
+
+%panel-fill{
+	@extend %cf;
+	 width    : 100%;
+	 height   : 100%;
+	 display  : block;
+	 position : relative;
+}
+
+.panel-fill{
+	@extend %panel-fill;
+}
+
+
+
+
+
+
+
+
+
+
+
+@mixin removeGaps($el:false){
+	@if $el{
+		letter-spacing: -0.31em; /* webkit */
+		*letter-spacing: normal; /* reset IE < 8 */
+		word-spacing: -0.43em; /* IE < 8 && gecko */
+
+		#{$el} {
+			letter-spacing: normal;
+			word-spacing: normal;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+// @include columns(250px, 0, 24px, COLOR, solid, 1px)
+@mixin columns($colwidth: 250px, $colcount: 0, $colgap: 50px, $columnRuleColor: #eee, $columnRuleStyle: solid, $columnRuleWidth: 1px) {
+	@include column-count($colcount);
+	@include column-gap($colgap);
+	@include column-width($colwidth);
+	@include column-rule-color($columnRuleColor);
+	@include column-rule-style($columnRuleStyle);
+	@include column-rule-width($columnRuleWidth);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * VERTICAL ALIGNMENT
+ * ------------------------------------------------------
+
+
+ * VALIGN ABSOLUTE
+ * ------------------------------------------------------
+ * @desc  centers element vertically using position absolute and negative top margin.
+ *        Requires known height of positioned element and parent with specified position.
+ *
+ * @param $h  float centered element's height
+ * ------------------------------------------------------ */
+@mixin valign-abs($h:false){
+
+	@if $h{
+		margin-top : $h * -.5;
+		position   : absolute;
+		top        : 50%;
+	}
+
+}
+
+// as in http://jsfiddle.net/chriscoyier/hJtpF/
+// http://css-tricks.com/centering-in-the-unknown/
+@mixin valign($child:false){
+
+	@if $child {
+		text-align: center;
+
+		&:before{
+			@include inline-block;
+			content : '';
+			height  : 100%;
+		}
+
+		#{$child}{
+			@include inline-block;
+		}
+	}
+
+}
+
+
+/* ------------------------------------------------------
+ * ENDOF: VERTICAL ALIGNMENT
+ * ------------------------------------------------------ */
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * ELEMENT SIZING
+ * ------------------------------------------------------
+ * @desc  sets display type and size
+
+ * @param $w  cssUnit width
+ * @param $h  cssUnit height
+ * @param $d  string  display-type
+ * ------------------------------------------------------ */
+
+@mixin dim($w:false, $h:false, $d:true){
+	@if $w {  width   : $w;  }
+	@if $h {  height  : $h;  }
+	@if $d {
+		@if ($d==inline or $d==table or $d==table-cell or $d==table-row or $d==table-column or $d==inherit or $d==none) {
+			display : $d;
+		}
+		@else{
+			display : block;
+		}
+	}
+}
+
+
+@mixin fill($block:true){
+	width  : 100%;
+	height : 100%;
+	@if $block == true{
+		display:block;
+	}
+}
+
+/* ------------------------------------------------------
+ * ENDOF: ELEMENT SIZING
+ * ------------------------------------------------------
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------
+ * POSITIONING
+ * ------------------------------------------------------
+ * @desc  positions element absolutely, relatively or as a fixed element
+
+ * @param $t  cssUnit top
+ * @param $r  cssUnit right
+ * @param $b  cssUnit bottom
+ * @param $l  cssUnit left
+ * ------------------------------------------------------ */
+
+@mixin pos($t:false, $r:false, $b:false, $l:false){
+	@if $t{ top:      $t; }
+	@if $r{ right:    $r; }
+	@if $b{ bottom:   $b; }
+	@if $l{ left:     $l; }
+}
+
+
+@mixin abs($t:false, $r:false, $b:false, $l:false){
+	position  : absolute;
+	@include pos($t, $r, $b, $l);
+}
+
+
+@mixin rel($t:false, $r:false, $b:false, $l:false){
+	position  : relative;
+	@include pos($t, $r, $b, $l);
+}
+
+
+@mixin fixed($t:false, $r:false, $b:false, $l:false){
+	position  : fixed;
+	@include pos($t, $r, $b, $l);
+}
+
+/* ------------------------------------------------------
+ * ENDOF: POSITIONING
+ * ------------------------------------------------------ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @include resize(VALUE) (none, both, horizontal, vertical, inherit)
+
+@mixin resize($direction: both) {
+	resize   : $direction;
+	overflow : auto;
+}

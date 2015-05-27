@@ -1,0 +1,37 @@
+.container {
+	overflow : hidden;
+	position : relative;
+
+	@include  ie8(){
+		min-width : 1024px;
+	}
+}
+
+
+.container--golden {
+	@extend .container;
+	background : $golden;
+	color      : $light--default;
+}
+
+
+.container--lightBlue {
+	@extend .container;
+	background : $blue;
+	color      : $light--default;
+}
+
+
+.container--darkBlue {
+	@extend .container;
+	background : $blue--dark;
+	color      : $light--default;
+	overflow   : hidden;
+}
+
+
+.container--black {
+	@extend .container;
+	background : $dark--default;
+	color      : $light--default;
+}

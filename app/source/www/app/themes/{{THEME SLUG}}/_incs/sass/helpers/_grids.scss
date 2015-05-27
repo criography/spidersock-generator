@@ -1,0 +1,435 @@
+/** grid-bleed
+	* ---------------------------------------
+	* sets negative margins on grid wrapper
+	* @param $gutter        css unit    grid gutter's width
+	* @param $resetSizing   bool        should box-sizing be redefined?
+	*/
+@mixin grid-bleed($gutter:false, $contentBox: false){
+	@if ($gutter){
+
+		@if ($contentBox){
+			@include box-sizing(content-box);
+		}
+
+		margin-left   : - $gutter;
+		margin-right  : - $gutter;
+		padding-left  : $gutter *.5;
+		padding-right : $gutter *.5;
+	}
+}
+
+
+
+/** grid-sizeItem
+	* ---------------------------------------
+	* sets grid item's width and horizontal margins
+	* @param $span      int         number of Susy columns each item is spanning across
+	* @param $gutter    css unit    grid gutter's width
+	* @param $cols      int         number of item columns in the grid
+	*/
+@mixin grid-sizeItem($span:false, $gutter:false, $cols:false){
+	@if ($cols and $span and $gutter){
+		width        : span($span) - $gutter * (1/$cols);
+		margin-right : $gutter * .5;
+		margin-left  : $gutter * .5;
+	}
+}
+
+
+
+
+
+
+
+
+/** grid
+	* ---------------------------------------
+	* !!! needs to be placed outside of a selector !!!
+	*
+	* USAGE:
+	* @include grid(2, '.grid--col2', '.grid--col2__item');
+	*	@include grid(3, '.grid--col3', '.grid--col3__item');
+	*	@include grid(4, '.grid--col4', '.grid--col4__item');
+	*
+	* ---------------------------------------
+	* @param $cols    int                           number of item columns
+	* @param $list    class selector                list/grid wrapper
+	* @param $child   element or class selector     list/grid item
+	* @extends list--inlineBlock mixin
+	*/
+	@mixin grid($cols:2, $list:false, $child:false){
+		$childSelector:list--getChild( $list, $child );
+
+		@if ($list) {
+
+			/* set all styles for the wrapper */
+			#{$list}{
+				list-style : none;
+				margin     : 0;
+			}
+
+
+						/* set all styles for the item */
+						#{$childSelector}{
+							@include inline-block;
+							width          : 100%;
+							vertical-align : top;
+						}
+
+
+
+			/* 2 COLUMNS */
+			@if $cols == 2 {
+
+					/* 640 */
+					@include susy-breakpoint(emcalc(640), $susy-640){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(3, gutter(), 2);
+							}
+					}
+
+
+					/* 1024 */
+					@include susy-breakpoint(emcalc(1024), $susy-1024){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(6, gutter(), 2);
+							}
+					}
+
+
+					/* 1280 */
+					@include susy-breakpoint(emcalc(1280), $susy-1280){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(6, gutter(), 2);
+							}
+					}
+
+
+
+
+			/* 3 COLUMNS */
+			}@else if $cols == 3 {
+
+					/* 480 */
+					@include susy-breakpoint(emcalc(480), $susy-480){
+
+						#{$list}{
+							@include grid-bleed(gutter(), true);
+						}
+
+
+						#{$childSelector}{
+							@include grid-sizeItem(2, gutter(), 2);
+						}
+					}
+
+
+					/* 640 */
+					@include susy-breakpoint(emcalc(640), $susy-640){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(3, gutter(), 2);
+							}
+					}
+
+
+					/* 1024 */
+					@include susy-breakpoint(emcalc(1024), $susy-1024){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(4, gutter(), 3);
+							}
+					}
+
+
+					/* 1280 */
+					@include susy-breakpoint(emcalc(1280), $susy-1280){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(4, gutter(), 3);
+							}
+					}
+
+
+
+
+			/* 4 COLUMNS */
+			}@else if $cols == 4 {
+
+					/* 480 */
+					@include susy-breakpoint(emcalc(480), $susy-480){
+
+						#{$list}{
+							@include grid-bleed(gutter(), true);
+						}
+
+
+						#{$childSelector}{
+							@include grid-sizeItem(2, gutter(), 2);
+						}
+					}
+
+
+					/* 640 */
+					@include susy-breakpoint(emcalc(640), $susy-640){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(2, gutter(), 3);
+							}
+					}
+
+
+					/* 1024 */
+					@include susy-breakpoint(emcalc(1024), $susy-1024){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(3, gutter(), 4);
+							}
+					}
+
+
+					/* 1280 */
+					@include susy-breakpoint(emcalc(1280), $susy-1280){
+
+							#{$list}{
+								@include grid-bleed(gutter());
+							}
+
+							#{$childSelector}{
+								@include grid-sizeItem(3, gutter(), 4);
+							}
+					}
+
+			}
+
+
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+/** tableRow
+	* ---------------------------------------
+	* Renders a row of equal height elements (cells).
+	* On smaller screens it turns to a single column layout.
+	*
+	* PLEASE NOTE:
+	* If using 3 cells, by default the 3 columns layout will be trigger at 1024px wide only.
+	* All mid-states have to be defined separately, based on design and content.
+	*
+	* IMPORTANT:
+	* mixin call needs to be placed outside of a selector!
+	*
+	* USAGE:
+	* @include tableRow(2, '.tableRow2', '.tableRow2__item');
+	*	@include tableRow(3, '.tableRow3', '.tableRow3__item');
+	*	@include tableRow(4, '.tableRow4', '.tableRow4__item');
+	*
+	* ---------------------------------------
+	* @param $cols    {2 | 3 | 4}                   number of item columns
+	* @param $list    {class selector}              list/grid wrapper
+	* @param $child   {element or class selector}   list/grid item
+	*
+	* @extends list--inlineBlock mixin
+	*/
+
+@mixin tableRow($cols:2, $list:false, $child:false){
+	$childSelector:list--getChild( $list, $child );
+
+	@if ($list) {
+
+		/* set all styles for the wrapper */
+		#{$list}{
+
+		}
+
+
+		/* set all styles for the item */
+		#{$childSelector}{
+			vertical-align: top;
+		}
+
+
+
+		/* 2 COLUMNS */
+		@if $cols == 2 {
+
+				/* 640 */
+				@include susy-breakpoint(emcalc(640), $susy-640){
+
+						#{$list}{
+							display : table;
+						}
+
+							#{$childSelector}{
+								display       : table-cell;
+								width         : 50%;
+								padding-right : gutter() *.5;
+
+								&:nth-child(2n){
+									padding-left  : gutter() *.5;
+									padding-right : 0;
+								}
+							}
+				}
+
+
+				/* 1024 */
+				@include susy-breakpoint(emcalc(1024), $susy-1024){
+
+					#{$childSelector}{
+						padding-right : gutter() *.5;
+
+						&:nth-child(2n){
+							padding-left  : gutter() *.5;
+							padding-right : 0;
+						}
+					}
+
+				}
+
+
+				/* 1280 */
+				@include susy-breakpoint(emcalc(1280), $susy-1280){
+
+					#{$childSelector}{
+						padding-right : gutter() *.5;
+
+						&:nth-child(2n){
+							padding-left  : gutter() *.5;
+							padding-right : 0;
+						}
+					}
+				}
+
+
+
+
+		/* 3 COLUMNS */
+		}@else if $cols == 3 {
+				#{$list}{
+					display : table;
+				}
+
+				/* 640 */
+				@include susy-breakpoint(emcalc(640), $susy-640){
+
+						#{$list}{
+							@include grid-bleed(gutter());
+						}
+
+						#{$childSelector}{
+							display : table-cell;
+							width   : span(2 of 6) + (gutter() * 2  / 3);
+
+							&:nth-child(1),
+							&:nth-child(2),{
+								padding-right:gutter() *.5;
+							}
+
+							&:nth-child(2),
+							&:nth-child(3){
+								padding-left:gutter() *.5;
+							}
+						}
+				}
+
+
+				/* 1024 */
+				@include susy-breakpoint(emcalc(1024), $susy-1024){
+
+						#{$list}{
+							@include grid-bleed(gutter());
+						}
+
+						#{$childSelector}{
+							width: span(4 of 12) + (gutter() * 2  / 3);
+
+							&:nth-child(1),
+							&:nth-child(2),{
+								padding-right:gutter() *.5;
+							}
+
+							&:nth-child(2),
+							&:nth-child(3){
+								padding-left:gutter() *.5;
+							}
+						}
+				}
+
+
+				/* 1280 */
+				@include susy-breakpoint(emcalc(1280), $susy-1280){
+
+						#{$list}{
+							@include grid-bleed(gutter());
+						}
+
+						#{$childSelector}{
+							width: span(4 of 12) + (gutter() * 2  / 3);
+
+							&:nth-child(1),
+							&:nth-child(2),{
+								padding-right:gutter() *.5;
+							}
+
+							&:nth-child(2),
+							&:nth-child(3){
+								padding-left:gutter() *.5;
+							}
+						}
+				}
+
+
+
+
+		}
+
+
+	}
+
+}
