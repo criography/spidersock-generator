@@ -1,0 +1,122 @@
+# IDE generated files #
+######################
+# Komodo
+*.komodoproject
+
+### SublimeText ###
+*.sublime-workspace
+sftp-config.json
+
+### PhpStorm ###
+.idea/
+
+### CodeKit ###
+*/codekit-config.json
+*/config.codekit
+
+### Eclipse ###
+*.pydevproject
+.metadata
+.gradle
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+### vim ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+
+
+
+
+
+
+# WordPress #
+#############
+www/wp-core
+
+
+
+
+
+# WP-CLI #
+##########
+db-sync
+sql-dump-*.sql
+www/app/plugins/*
+!www/app/plugins/.gitignore
+!www/app/plugins/index.php
+www/app/mu-plugins/*
+!www/app/mu-plugins/.gitignore
+!www/app/mu-plugins/index.php
+www/app/upgrade
+www/app/uploads/*
+!www/app/uploads/.gitkeep
+!www/app/mu-plugins/disallow-indexing.php
+!www/app/mu-plugins/register-theme-directory.php
+!www/app/mu-plugins/bedrock-autoloader.php
+
+
+
+
+
+# Dotenv #
+##########
+.env
+.env.*
+!.env.example
+
+
+
+
+
+# Vagrant generated files #
+###########################
+.vagrant
+
+
+
+
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+
+
+
+
+# Compilers generated files #
+#############################
+.sass-cache/
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+pids
+../source/www/uploads/ithemes-security/logs
+results
+npm-debug.log
+/node_modules
+/.bundle/ruby/
+/vendor
+
+
