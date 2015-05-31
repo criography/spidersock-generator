@@ -27,13 +27,15 @@ var Prompter = function Prompter(name) {
 			name     : 'wordpress',
 			username : 'spider',
 			password : 'sock',
-			host     : 'localhost'
+			host     : 'localhost',
+			prefix   : 'wp_'
 		},
 
-		wp_theme : {
+		site : {
 			name        : '',
+			theme_slug  : '',
+			url         : '',
 			description : '',
-			slug        : '',
 			version     : '1.0'
 		},
 
@@ -67,7 +69,7 @@ var Prompter = function Prompter(name) {
 
 
 	this.questions =[
-		/*{ type    : "list",
+		{ type    : "list",
 			name    : "env#server",
 			message : "Which server do you want to use?",
 			summary_message : "Server",
@@ -170,12 +172,48 @@ var Prompter = function Prompter(name) {
 				}
 			},
 			default : _this.defaults.db.host
-		},*/
+		},
 
 		{ type     : "input",
-			name     : "wp_theme#name",
+			name     : "db#prefix",
+			message  : "What table prefix you want to use? (min 4 characters, eg.:xyz_, leave empty to generate)",
+			summary_message : "DB table prefix",
+			filter : function(value){
+				if(!value){
+					value = Math.random().toString(36).substr(2,6);
+				}
+
+				return value;
+			},
+			validate : function (value) {
+				var pass = !value || value.length>4 && value.substr(-1) === '_';
+				if (pass) {
+					return true;
+				} else {
+					return "Please leave empty to generate, or min 4 characters ending with _";
+				}
+			}
+		},
+
+		{ type     : "input",
+			name     : "site#url",
+			message  : "What's the website URL? (including protocol)",
+		 summary_message : "Site URL",
+			validate : function (value) {
+
+				if( value.match(/^https?:\/\/[a-zA-Z0-9-]+(\.[a-zA-Z]+)*$/) ){
+					return true;
+				} else {
+					return "Valid URL with protocol, please";
+				}
+
+			}
+		},
+
+		{ type     : "input",
+			name     : "site#name",
 			message  : "What's the website's name/title? (min 4 characters)",
-		 summary_message : "Theme Name",
+		 summary_message : "Site Name",
 			validate : function (value) {
 				var pass = value.length>=4;
 				if (pass) {
@@ -187,7 +225,7 @@ var Prompter = function Prompter(name) {
 		},
 
 		 { type     : "input",
-			 name     : "wp_theme#slug",
+			 name     : "site#theme_slug",
 			 message  : "What's the theme's slug? (min 4 characters)",
 			 summary_message : "Theme Slug",
 			 validate : function (value) {
@@ -200,16 +238,16 @@ var Prompter = function Prompter(name) {
 				 }
 			 },
 			 default: function(props){
-				return props['wp_theme#name'].
+				return props['site#name'].
 								replace(/[\s]+/g, '_').
 								replace(/[\.,-\/#!$%\^&\*;:{}=`~()]/g, "").
 								replace(/[_\s]+/g, '-').
 								toLowerCase();
 			 }
-		 }/*,
+		 },
 
 		{ type     : "input",
-			name     : "wp_theme#description",
+			name     : "site#description",
 			message  : "What's the website's description? (max 128 chars)",
 			summary_message : "Site Description",
 			validate : function (value) {
@@ -224,7 +262,7 @@ var Prompter = function Prompter(name) {
 
 
 		{ type     : "input",
-			name     : "wp_theme#slug",
+			name     : "site#version",
 			message  : "What's the website's/theme's version? ^([\d]+\.)*[\d]+$, e.g.: 2.1",
 			summary_message : "Theme Version",
 			validate : function (value) {
@@ -235,7 +273,7 @@ var Prompter = function Prompter(name) {
 					return "try to follow ^([\d]+\.)*[\d]+$ convention";
 				}
 			},
-			default: _this.defaults.wp_theme.version
+			default: _this.defaults.site.version
 		},
 
 		{ type    : "checkbox",
@@ -312,7 +350,7 @@ var Prompter = function Prompter(name) {
 		{ type     : "password",
 			name     : "wp_admin#password",
 			message  : "What's the password you want to use for WP? (leave empty to generate it)",
-		 summary_message : "WP Admin password",
+			summary_message : "WP Admin password",
 			filter : function(value){
 				if(!value){
 					value = Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2, 6);
@@ -325,7 +363,7 @@ var Prompter = function Prompter(name) {
 		{ type     : "input",
 			name     : "wp_admin#email",
 			message  : "What's your email address?",
-		 summary_message : "WP Admin email",
+			summary_message : "WP Admin email",
 			validate : function (value) {
 				var pass = value.match(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/);
 				if (pass) {
@@ -335,7 +373,7 @@ var Prompter = function Prompter(name) {
 				}
 			}
 		}
-*/
+
 
 
 

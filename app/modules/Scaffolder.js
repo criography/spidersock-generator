@@ -15,6 +15,7 @@ var _         = require('underscore');
 var util      = require('util');
 var gitclone  = require('git-clone');
 var rimraf  = require('rimraf');
+var mustache = require('mustache');
 
 var readdirSyncRecursive = require('fs-readdir-recursive');
 
@@ -47,17 +48,20 @@ Scaffolder.prototype.init = function (callback) {
 			},
 			function (cb) {
 				_this.correctFSPaths(cb);
+			},
+			function(callback) {
+				async.parallel(
+					[
+						function (cb) {
+							_this.generateEnv(cb);
+						}
+					],
+
+					function (error, results) {
+						if (error) return console.error(error);
+					}
+				);
 			}
-			/*,
-
-		 function(callback) {
-		 async.parallel(
-		 [],
-
-		 function (err) {
-		 callback();
-		 });
-		 }*/
 		]
 	);
 
@@ -85,6 +89,7 @@ Scaffolder.prototype.init = function (callback) {
 			spinner.destroy('WP skeleton installed');
 
 			rimraf('.git', function(error){
+				if (error) return console.error(err);
 				//error
 				cb();
 			});
@@ -117,8 +122,8 @@ Scaffolder.prototype.init = function (callback) {
 	Scaffolder.prototype.plantTheme = function(cb){
 		var spinner = Log.wait('Generating Theme Skeleton');
 
-		if(config.answers['wp_theme#slug']){
-			config.paths.theme = path.join('./web/app/themes/', config.answers['wp_theme#slug']);
+		if(config.answers['site#theme_slug']){
+			config.paths.theme = path.join('./web/app/themes/', config.answers['site#theme_slug']);
 			fs.mkdirsSync(config.paths.theme);
 		}
 
@@ -163,7 +168,7 @@ Scaffolder.prototype.init = function (callback) {
 				fs.rename('web', 'www', function(error) {
 					//error
 
-					config.paths.theme = path.join('./www/app/themes/', config.answers['wp_theme#slug']);
+					config.paths.theme = path.join('./www/app/themes/', config.answers['site#theme_slug']);
 					cb(null, 'projectRoot');
 				})
 			},
@@ -171,7 +176,7 @@ Scaffolder.prototype.init = function (callback) {
 			function (cb) {
 				fs.rename(
 					path.join(config.paths.theme, '_incs/sass/{{THEME\ SLUG}}.scss'),
-					path.join(config.paths.theme, '_incs/sass/' + config.answers['wp_theme#slug'] + '.scss'),
+					path.join(config.paths.theme, '_incs/sass/' + config.answers['site#theme_slug'] + '.scss'),
 					function(error) {
 						//error
 
@@ -190,6 +195,53 @@ Scaffolder.prototype.init = function (callback) {
 /**-----------------------------------------------------------------------------
  * ENDOF: correctFSPaths
  * -----------------------------------------------------------------------------*/
+
+
+
+
+
+/**-----------------------------------------------------------------------------
+ * generateEnv
+ * -----------------------------------------------------------------------------
+ * Generates .env from .env.sample
+ *
+ * @constructor
+ * @private
+ * @this    {object}            Main object
+ * @param   {function}  cb      Promise callback
+ * @return  {void}
+ * -----------------------------------------------------------------------------*/
+
+	Scaffolder.prototype.generateEnv = function(cb){
+		var _env = '';
+
+		fs.readFile(
+			path.join(config.paths.templates, '.env'), 'utf8', function (error, data) {
+				if (error) {
+					return console.log(err);
+				}
+
+				fs.writeFile(
+					'./.env', mustache.render(data, config.answers), {mode:420}, function (error) {
+						if (error) return console.log(error);
+
+						Log.status('.env file generated');
+						cb();
+					}
+				);
+
+			}
+		);
+
+	};
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: generateEnv
+ * -----------------------------------------------------------------------------*/
+
+
+
+
 
 
 module.exports = Scaffolder;

@@ -40,9 +40,9 @@ Spidersock.prototype.init = function () {
 
 
 	async.series([
-		function (callback) {
+/*		function (callback) {
 			prompter.init(callback);
-		},
+		},*/
 		function (callback) {
 			scaffolder.init(callback);
 		}/*,
