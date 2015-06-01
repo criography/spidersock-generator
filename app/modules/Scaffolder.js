@@ -17,6 +17,7 @@ var gitclone  = require('git-clone');
 var rimraf  = require('rimraf');
 var mustache = require('mustache');
 
+
 var readdirSyncRecursive = require('fs-readdir-recursive');
 
 
@@ -49,23 +50,40 @@ Scaffolder.prototype.init = function (callback) {
 			function (cb) {
 				_this.correctFSPaths(cb);
 			},
-			function(callback) {
+			function(cb) {
+
 				async.parallel(
 					[
-						function (cb) {
-							_this.generateEnv(cb);
+						function (innercb) {
+							_this.generateEnv(innercb);
+						},
+						function (innercb) {
+							_this.createLocalConfig(innercb);
 						}
 					],
 
 					function (error, results) {
-						if (error) return console.error(error);
+						if (error) {
+							return console.error(error);
+						}
+
+						cb();
 					}
 				);
+
 			}
-		]
+		],
+
+	  function(error){
+		  if (error) {
+			  return console.error(error);
+		  }
+
+		  callback();
+	  }
 	);
 
-	callback();
+
 };
 
 
@@ -152,7 +170,8 @@ Scaffolder.prototype.init = function (callback) {
 /**-----------------------------------------------------------------------------
  * correctFSPaths
  * -----------------------------------------------------------------------------
- * Renames all directories and files to match answers
+ * Renames all directories and files to match answers and
+ * updates references in all config files
  *
  * @constructor
  * @private
@@ -163,32 +182,58 @@ Scaffolder.prototype.init = function (callback) {
 
 	Scaffolder.prototype.correctFSPaths = function(cb){
 
-		async.series([
-			function (cb) {
-				fs.rename('web', 'www', function(error) {
-					//error
-
-					config.paths.theme = path.join('./www/app/themes/', config.answers['site#theme_slug']);
-					cb(null, 'projectRoot');
-				})
-			},
-
-			function (cb) {
-				fs.rename(
-					path.join(config.paths.theme, '_incs/sass/{{THEME\ SLUG}}.scss'),
-					path.join(config.paths.theme, '_incs/sass/' + config.answers['site#theme_slug'] + '.scss'),
-					function(error) {
+		async.series(
+			[
+				function (innercb) {
+					fs.rename('web', 'www', function(error) {
 						//error
 
-						cb(null, 'sassController');
-					}
-				)
+						config.paths.theme = path.join('./www/app/themes/', config.answers['site#theme_slug']);
+						innercb(null, 'projectRoot');
+					})
+				},
+
+				function (innercb) {
+					fs.rename(
+						path.join(config.paths.theme, '_incs/sass/{{THEME\ SLUG}}.scss'),
+						path.join(config.paths.theme, '_incs/sass/' + config.answers['site#theme_slug'] + '.scss'),
+						function(error) {
+							//error
+
+							innercb(null, 'sassController');
+						}
+					)
+				},
+
+				function(innercb){
+
+
+					File.replacer(
+						[
+							'./wp-cli.yml',
+							'./composer.json',
+							'./.travis.yml',
+							'./.gitignore',
+							'./config/application.php'
+						],
+						"web/",
+						"www/",
+						innercb,
+						null,
+						null
+					);
+
+				}
+			],
+			function(error, result){
+				if(error){
+					return error;
+				}
+				Log.status('Docroot references updated');
+
+				cb();
 			}
-		],
-		function (error, results) {
-			cb();
-		}
-	);
+		);
 
 	};
 
@@ -239,6 +284,37 @@ Scaffolder.prototype.init = function (callback) {
  * ENDOF: generateEnv
  * -----------------------------------------------------------------------------*/
 
+
+
+
+/**-----------------------------------------------------------------------------
+ * createLocalConfig
+ * -----------------------------------------------------------------------------
+ * Generates local.php environment config based on development.php
+ *
+ * @constructor
+ * @private
+ * @this    {object}            Main object
+ * @param   {function}  cb      Promise callback
+ * @return  {void}
+ * -----------------------------------------------------------------------------*/
+
+	Scaffolder.prototype.createLocalConfig = function(cb){
+		fs.copy(
+			'./config/environments/development.php', './config/environments/local.php', function (err) {
+				if (err) return console.error(err);
+
+				Log.status('Local environment config created');
+
+				cb();
+			}
+		);
+
+	};
+
+/**-----------------------------------------------------------------------------
+ * ENDOF: createLocalConfig
+ * -----------------------------------------------------------------------------*/
 
 
 

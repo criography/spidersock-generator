@@ -49,6 +49,7 @@
     "nodegit": "^0.4.0",
     "prompt": "^0.2.14",
     "q": "^1.2.0",
+    "replace": "^0.3.0",
     "replacestream": "^2.1.0",
     "rimraf": "^2.3.4",
     "sanitize-filename": "*",
